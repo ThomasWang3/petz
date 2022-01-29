@@ -8,7 +8,7 @@ public class LevelManager : UnityEngine.ScriptableObject
 {
     public string[] levels;
     public int currentLevelIndex = 0;
-    GameObject pauseUI = GameObject.Find("PauseUI");
+    //GameObject pauseUI = GameObject.Find("PauseUI");
 
 
     public void LoadLevelWithIndex(int index) {
@@ -41,13 +41,13 @@ public class LevelManager : UnityEngine.ScriptableObject
         LoadLevelWithIndex(currentLevelIndex);
     }
 
-    public void Pause() {
-        Debug.Log("pausing");
-        pauseUI.SetActive(true);
-    }
-    public void Resume() {
-        Debug.Log("unpausing");
-        pauseUI.SetActive(false);
-    }
+    //public void Pause() {
+    //    Debug.Log("pausing");
+    //    pauseUI.SetActive(true);
+    //}
+    //public void Resume() {
+    //    Debug.Log("unpausing");
+    //    pauseUI.SetActive(false);
+    //}
 
 }

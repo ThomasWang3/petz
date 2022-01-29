@@ -47,11 +47,22 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Pet.cs" />
-     <Compile Include="Assets\Scripts\CombatManager.cs" />
-     <Compile Include="Assets\Scripts\Character.cs" />
-     <Compile Include="Assets\Scripts\Human.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\Characters\Pet.cs" />
+     <Compile Include="Assets\Scripts\CombatManager.cs" />
+     <Compile Include="Assets\Scripts\Characters\Character.cs" />
+     <Compile Include="Assets\Scripts\Characters\Human.cs" />
+     <Compile Include="Assets\Scripts\Characters\Snake.cs" />
+     <Compile Include="Assets\Scripts\Characters\Bird.cs" />
+     <Compile Include="Assets\Scripts\Characters\Dog.cs" />
+     <Compile Include="Assets\Scripts\Characters\Fish.cs" />
+     <Compile Include="Assets\Scripts\Characters\Cat.cs" />
+     <Compile Include="Assets\Scripts\Characters\OldLady.cs" />
+     <Compile Include="Assets\Scripts\Characters\Fisherman.cs" />
+     <Compile Include="Assets\Scripts\Characters\PunkKid.cs" />
+     <Compile Include="Assets\Scripts\Characters\RichMan.cs" />
+     <Compile Include="Assets\Scripts\Characters\Veteran.cs" />
+     <Compile Include="Assets\Scripts\Characters\NewBehaviourScript.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
