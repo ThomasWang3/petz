@@ -5,6 +5,7 @@ using UnityEngine;
 public class OldLady : Human {
     // Start is called before the first frame update
     public void Start() {
+        type = "OldLady";
         strengths.Add("bird");
         weaknesses.Add("dog");
     }

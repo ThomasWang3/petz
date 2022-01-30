@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    public int health;
+    public int maxHealth;
+    public int currHealth;
     public int attack;
     public string type;
     public List<string> strengths;
@@ -16,18 +17,18 @@ public abstract class Character : MonoBehaviour
 
     protected Character() { }
 
-    public void AttackEnemy(Character human) {
-        if (strengths.Contains(human.GetCharType())) {
-            human.TakeDamage(2 * attack);
-        } else if (weaknesses.Contains(human.GetCharType())) {
-            human.TakeDamage(attack / 2);
+    public void AttackEnemy(Character enemy) {
+        if (strengths.Contains(enemy.GetCharType()) || enemy.weaknesses.Contains(type)) {
+            enemy.TakeDamage(2 * attack);
+        } else if (weaknesses.Contains(enemy.GetCharType()) || enemy.strengths.Contains(type)) { 
+            enemy.TakeDamage(attack / 2);
         } else {
-            human.TakeDamage(attack);
+            enemy.TakeDamage(attack);
         }
     }
 
     public void TakeDamage(int damageTaken) {
-        health -= damageTaken;
+        currHealth -= damageTaken;
     }
 
 

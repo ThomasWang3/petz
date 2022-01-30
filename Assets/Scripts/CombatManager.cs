@@ -36,6 +36,7 @@ public class CombatManager : MonoBehaviour
         petIndexMax = currPets.Count;
         humanIndexMax = currHumans.Count;
         currPet = currPets[petIndex];
+        currHuman = currHumans[petIndex];
     }
 
     // Update is called once per frame
@@ -82,11 +83,14 @@ public class CombatManager : MonoBehaviour
     }
 
     //attacks and accommodates for type matchups 
-    void attack()
+    public void attack()
     {
         // tentatively (both attack at the same time), player first
         // maybe implement animation between these in order to facilitate "turn order"
+        Debug.Log(currPet.type + " is attacking " + currHuman.type);
         currPet.AttackEnemy(currHuman);
+
+        Debug.Log(currHuman.type + " is attacking " + currPet.type);
         currHuman.AttackEnemy(currPet);
     }
 }
