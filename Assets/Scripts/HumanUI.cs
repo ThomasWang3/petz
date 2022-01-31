@@ -37,8 +37,21 @@ public class HumanUI : BattleUI
     void Update() {
         character = cm.currHuman;
         // if the player changes pets or takes damage, rewrite the UI
-        if (charName.text != character.type || currHealth != character.currHealth) {
-            SetHealthUI();
+        if (character != null) {
+            if (charName.text != character.type) {
+                character.gameObject.SetActive(false);
+                character = cm.currHuman;
+                character.gameObject.SetActive(true);
+                SetHealthUI();
+            }
+            if (currHealth != character.currHealth) {
+                SetHealthUI();
+            }
+        } else {
+            currHealth = 0;
+            slider.value = currHealth;
+            hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
+            fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
         }
     }
 }

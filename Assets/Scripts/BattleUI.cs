@@ -34,6 +34,7 @@ public class BattleUI : MonoBehaviour
 
         hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
         fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
+        
     }
 
 }

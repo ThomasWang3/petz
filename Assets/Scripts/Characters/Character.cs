@@ -10,12 +10,13 @@ public abstract class Character : MonoBehaviour
     public string type;
     public List<string> strengths;
     public List<string> weaknesses;
+    public bool isDead = false;
 
     public string GetCharType() {
         return type;
     }
 
-    protected Character() { }
+    //protected Character() { }
 
     public void AttackEnemy(Character enemy) {
         if (strengths.Contains(enemy.GetCharType()) || enemy.weaknesses.Contains(type)) {
@@ -29,6 +30,9 @@ public abstract class Character : MonoBehaviour
 
     public void TakeDamage(int damageTaken) {
         currHealth -= damageTaken;
+        if(currHealth <= 0) {
+            isDead = true;
+        }
     }
 
 
