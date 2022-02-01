@@ -10,7 +10,7 @@ public class SpeedItem : Item
         itemName = "Speed Pill";
     }
 
-    public void UseItem(CombatManager combatManager)
+    public override void UseItem(CombatManager combatManager)
     {
         //combatManager.SkipEnemyTurn();
     }

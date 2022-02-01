@@ -11,7 +11,7 @@ public class StrengthItem : Item
         itemName = "Strength Pill";
     }
 
-    public void UseItem(CombatManager combatManager)
+    public override void UseItem(CombatManager combatManager)
     {
         combatManager.currPet.attack += strIncrease;
     }

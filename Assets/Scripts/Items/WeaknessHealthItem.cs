@@ -11,9 +11,9 @@ public class WeaknessHealthItem : Item
         itemName = "Weakness for Health Pill";
     }
 
-    public void UseItem(CombatManager combatManager)
+    public override void UseItem(CombatManager combatManager)
     {
-        combatManager.currPet.health = combatManager.currPet.maxHealth;
+        combatManager.currPet.currHealth = combatManager.currPet.maxHealth;
         combatManager.currPet.attack -= strAmount;
     }
 }

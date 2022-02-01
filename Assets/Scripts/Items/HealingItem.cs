@@ -11,15 +11,15 @@ public class HealingItem : Item
         itemName = "Healing Pill";
     }
 
-    public void UseItem(CombatManager combatManager)
+    public override void UseItem(CombatManager combatManager)
     {
-        if (combatManager.currPet.health + hpIncrease >= combatManager.currPet.maxHealth)
+        if (combatManager.currPet.currHealth + hpIncrease >= combatManager.currPet.maxHealth)
         {
-            combatManager.currPet.health = combatManager.currPet.maxHealth;
+            combatManager.currPet.currHealth = combatManager.currPet.maxHealth;
         }
         else
         {
-            combatManager.currPet.health += hpIncrease;
+            combatManager.currPet.currHealth += hpIncrease;
         }
     }
 }

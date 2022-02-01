@@ -10,9 +10,9 @@ public class BloodStrengthItem : Item
         itemName = "Blood for Strength Pill";
     }
 
-    public void UseItem(CombatManager combatManager)
+    public override void UseItem(CombatManager combatManager)
     {
-        combatManager.currPet.health = combatManager.currPet.health / 2;
+        combatManager.currPet.currHealth = combatManager.currPet.currHealth / 2;
         combatManager.currPet.attack = combatManager.currPet.attack * 2;
     }
 }
