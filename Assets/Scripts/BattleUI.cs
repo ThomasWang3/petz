@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class BattleUI : MonoBehaviour
 {
-    protected Text charName;
-    protected Text hp;
+    [SerializeField] protected Text charName;
+    [SerializeField] protected Text hp;
 
-    protected float maxHealth;
-    protected float currHealth;
+    [SerializeField] protected float maxHealth;
+    [SerializeField] protected float currHealth;
 
-    protected Slider slider;
-    protected Image fillImage;
+    [SerializeField] protected Slider slider;
+    [SerializeField] protected Image fillImage;
     protected Color fullHealthColor = Color.green;
     protected Color zeroHealthColor = Color.red;
 

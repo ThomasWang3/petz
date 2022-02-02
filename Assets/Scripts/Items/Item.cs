@@ -4,8 +4,19 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
-    public int numHeld;
-    public string itemName;
+    [SerializeField] protected int numHeld;
+    [SerializeField] protected string itemName;
+
+
+    public int getNumItemHeld()
+    {
+        return numHeld;
+    }
+
+    public string getItemName()
+    {
+        return itemName;
+    }
 
     public abstract void UseItem(CombatManager combatManager);
 }
