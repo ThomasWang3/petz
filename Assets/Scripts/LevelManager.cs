@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+// Author(s): Thomas Wang
 [CreateAssetMenu(fileName = "levelManager", menuName = "LevelManager")]
 public class LevelManager : UnityEngine.ScriptableObject
 {

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+
+// Author(s): Thomas Wang
 public class VictoryUI : MonoBehaviour
 {
     [SerializeField] private CombatManager cm;

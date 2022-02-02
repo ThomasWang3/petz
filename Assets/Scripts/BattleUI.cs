@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
+// Author(s): Thomas Wang
 public class BattleUI : MonoBehaviour
 {
     [SerializeField] protected Text charName;

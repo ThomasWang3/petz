@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author(s): Thomas Wang, Logan Mikulski
 public abstract class Character : MonoBehaviour
 {
     [SerializeField] protected int maxHealth;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author(s): Thomas Wang, Logan Mikulski
 public class CombatManager : MonoBehaviour {
     [SerializeField] private Pet currPet;
     [SerializeField] private List<Pet> currPets;

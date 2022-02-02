@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author(s): Logan Mikulski
 public abstract class Item : MonoBehaviour
 {
     [SerializeField] protected int numHeld;

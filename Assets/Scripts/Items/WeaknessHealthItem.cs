@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author(s): Logan Mikulski
 public class WeaknessHealthItem : Item
 {
     [SerializeField] private int attackAmount = 5;

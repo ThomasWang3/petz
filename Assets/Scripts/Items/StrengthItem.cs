@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author(s): Logan Mikulski
 public class StrengthItem : Item
 {
     [SerializeField] private int attackIncrease = 5;
