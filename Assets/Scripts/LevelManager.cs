@@ -41,6 +41,7 @@ public class LevelManager : UnityEngine.ScriptableObject
         LoadLevelWithIndex(currentLevelIndex);
     }
 
+    // Fix pause feature
     //public void Pause() {
     //    Debug.Log("pausing");
     //    pauseUI.SetActive(true);

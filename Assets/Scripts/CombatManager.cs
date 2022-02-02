@@ -17,10 +17,11 @@ public class CombatManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         //need to fill pets array and humans array with all pets and humans in current fight
-        //petIndexMax = currPets.Count;
-        //humanIndexMax = currHumans.Count;
         currPet = currPets[petIndex];
         currHuman = currHumans[petIndex];
+        // for future purpose either
+        // 1. find a way to change all pets/humans to the same position on the screen 
+        // 2. find a way to have all "inactive" objects to be faded out as opposed to completely invisible
         for (int i = 0; i < currPets.Count; i++) {
             //currPets[i].transform.position = new Vector3(50 , Screen.height / 2, 0);
             if (currPets[i] != currPet) {
@@ -83,7 +84,7 @@ public class CombatManager : MonoBehaviour {
         return humanWin;
     }
 
-    //goes to next pet if nextKey is pressed
+    // goes to next pet if nextKey ("a") is pressed
     void next() {
         //Debug.Log("next function");
         if (petIndex < (currPets.Count - 1)) {
@@ -95,7 +96,7 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    //goes to previous pet if prevKey is pressed
+    //goes to previous pet if prevKey ("d") is pressed
     void previous() {
         //Debug.Log("previous function");
         if (petIndex > 0) {
@@ -107,7 +108,8 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    //attacks and accommodates for type matchups 
+    // facilitates attack (currently pet goes first, then human)
+    // in the future, maybe implement speed stat and/or item usage 
     public void attack() {
         // tentatively (both attack at the same time), player first
         // maybe implement animation between these in order to facilitate "turn order"
@@ -133,6 +135,7 @@ public class CombatManager : MonoBehaviour {
     }
 
 
+    // used to remove a pet from the list when the pet dies, allowing the right pet to be selected afterwards
     private void removePet() {
         // only one pet remaining
         if (currPets.Count == 1) {
@@ -150,6 +153,8 @@ public class CombatManager : MonoBehaviour {
             currPet = currPets[petIndex];
         }
     }
+
+    // used to remove a human from the list when the human dies, allowing the right human to be selected afterwards
     private void removeHuman() {
         // only one pet remaining
         if (currHumans.Count == 1) {

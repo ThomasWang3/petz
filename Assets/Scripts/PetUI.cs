@@ -8,30 +8,8 @@ public class PetUI : BattleUI
     protected override void OnEnable() {
         base.OnEnable();
         character = cm.getCurrPet();
-
-        //charName.text = character.type;
-
-        //currHealth = character.currHealth;
-        //slider.value = currHealth;
-        //maxHealth = character.maxHealth;
-        //slider.maxValue = maxHealth;
-
-        //hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
-        //fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
     }
 
-    //private void SetHealthUI() {
-    //    charName.text = cm.currPet.type;
-
-    //    currHealth = cm.currPet.currHealth;
-    //    slider.value = currHealth;
-
-    //    maxHealth = cm.currPet.maxHealth;
-    //    slider.maxValue = maxHealth;
-
-    //    hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
-    //    fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
-    //}
 
     // Update is called once per frame
     void Update() {
@@ -48,6 +26,7 @@ public class PetUI : BattleUI
                 SetHealthUI();
             }
         } else {
+            // used to check if the last pet is null, and then appropriately change the HP text to 0/maxHealth;
             currHealth = 0;
             slider.value = currHealth;
             hp.text = currHealth.ToString() + " / " + maxHealth.ToString();

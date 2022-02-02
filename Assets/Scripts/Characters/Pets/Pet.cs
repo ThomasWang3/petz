@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Pet : Character
 {
-
-    // maybe?
-    //public abstract void Items();
+    // future implementation to use items
+    // public abstract void Items();
 }

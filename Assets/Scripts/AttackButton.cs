@@ -12,8 +12,15 @@ public class AttackButton : MonoBehaviour
         cm = FindObjectOfType<CombatManager>();
     }
 
+    // OnClick() function for the button calls attack() from the combatmanager class
     public void attack() {
-        Debug.Log("attack button pressed");
+        //Debug.Log("attack button pressed");
         cm.attack();
+    }
+
+    private void Update() {
+        if(cm.getPetWin() || cm.getHumanWin()) {
+            gameObject.GetComponent<Button>().interactable = false;
+        }
     }
 }

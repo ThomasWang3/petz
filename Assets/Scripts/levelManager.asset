@@ -15,5 +15,4 @@ MonoBehaviour:
   levels:
   - MainMenu
   - SampleScene
-  - New Scene
-  currentLevelIndex: 1
+  currentLevelIndex: 0

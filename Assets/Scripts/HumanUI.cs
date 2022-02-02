@@ -8,30 +8,7 @@ public class HumanUI : BattleUI
     protected override void OnEnable() {
         base.OnEnable();
         character = cm.getCurrHuman();
-
-        //charName.text = character.type;
-
-        //maxHealth = character.maxHealth;
-        //slider.maxValue = maxHealth;
-        //currHealth = character.currHealth;
-        //slider.value = currHealth;
-
-        //hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
-        //fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
     }
-
-    //private void SetHealthUI() {
-    //    charName.text = cm.currHuman.type;
-
-    //    currHealth = cm.currHuman.currHealth;
-    //    slider.value = currHealth;
-
-    //    maxHealth = cm.currHuman.maxHealth;
-    //    slider.maxValue = maxHealth;
-
-    //    hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
-    //    fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
-    //}
 
     // Update is called once per frame
     void Update() {
@@ -48,6 +25,7 @@ public class HumanUI : BattleUI
                 SetHealthUI();
             }
         } else {
+            // used to check if the last human is null, and then appropriately change the HP text to 0/maxHealth;
             currHealth = 0;
             slider.value = currHealth;
             hp.text = currHealth.ToString() + " / " + maxHealth.ToString();

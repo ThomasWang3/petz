@@ -21,8 +21,9 @@ public class BattleUI : MonoBehaviour
 
     protected virtual void OnEnable() {
         cm = FindObjectOfType<CombatManager>();
-        //SetHealthUI();
     }
+    
+    // updates the health UI when called
     public void SetHealthUI() {
         charName.text = character.getCharType();
 
