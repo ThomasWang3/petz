@@ -38,6 +38,7 @@ public class CombatManager : MonoBehaviour {
         currPet = currPets[petIndex];
         currHuman = currHumans[petIndex];
         for (int i = 0; i < currPets.Count; i++) {
+            //currPets[i].transform.position = new Vector3(50 , Screen.height / 2, 0);
             if (currPets[i] != currPet) {
                 currPets[i].gameObject.SetActive(false);
             } else {
@@ -45,6 +46,7 @@ public class CombatManager : MonoBehaviour {
             }
         }
         for (int i = 0; i < currHumans.Count; i++) {
+            //currHumans[i].transform.position = new Vector3(FindObjectOfType<Camera>().transform.position.x - 50, Screen.height / 2 / 2, 0);
             if (currHumans[i] != currHuman) {
                 currHumans[i].gameObject.SetActive(false);
             } else {
