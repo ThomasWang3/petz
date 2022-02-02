@@ -16,6 +16,10 @@ public abstract class Character : MonoBehaviour
         return type;
     }
 
+
+
+
+
     //protected Character() { }
 
     public void AttackEnemy(Character enemy) {
