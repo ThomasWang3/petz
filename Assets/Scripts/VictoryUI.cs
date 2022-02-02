@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class VictoryUI : MonoBehaviour
 {
-    public CombatManager cm;
-    public Text victoryText;
+    [SerializeField] private CombatManager cm;
+    [SerializeField] private Text victoryText;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +15,9 @@ public class VictoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cm.petWin) {
+        if (cm.getPetWin()) {
             victoryText.text = "Pets Win!";
-        } else if (cm.humanWin) {
+        } else if (cm.getHumanWin()) {
             victoryText.text = "Humans Win!";
         }
     }

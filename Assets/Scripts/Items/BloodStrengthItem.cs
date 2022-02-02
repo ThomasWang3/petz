@@ -12,7 +12,8 @@ public class BloodStrengthItem : Item
 
     public override void UseItem(CombatManager combatManager)
     {
-        combatManager.currPet.currHealth = combatManager.currPet.currHealth / 2;
-        combatManager.currPet.attack = combatManager.currPet.attack * 2;
+        Pet currPet = combatManager.getCurrPet();
+        currPet.setCurrHealth(currPet.getCurrHealth() / 2);
+        currPet.setAttack(currPet.getAttack() * 2);
     }
 }

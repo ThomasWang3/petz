@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class BattleUI : MonoBehaviour
 {
-    public Text charName;
-    public Text hp;
+    protected Text charName;
+    protected Text hp;
 
-    public float maxHealth;
-    public float currHealth;
+    protected float maxHealth;
+    protected float currHealth;
 
-    public Slider slider;
-    public Image fillImage;
+    protected Slider slider;
+    protected Image fillImage;
     protected Color fullHealthColor = Color.green;
     protected Color zeroHealthColor = Color.red;
 
@@ -24,11 +24,11 @@ public class BattleUI : MonoBehaviour
         //SetHealthUI();
     }
     public void SetHealthUI() {
-        charName.text = character.type;
+        charName.text = character.getCharType();
 
-        maxHealth = character.maxHealth;
+        maxHealth = character.getMaxHealth();
         slider.maxValue = maxHealth;
-        currHealth = character.currHealth;
+        currHealth = character.getCurrHealth();
         slider.value = currHealth;
 
 

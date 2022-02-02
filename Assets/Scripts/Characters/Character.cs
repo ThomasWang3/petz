@@ -4,13 +4,13 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    public int maxHealth;
-    public int currHealth;
-    public int attack;
-    public string type;
-    public List<string> strengths;
-    public List<string> weaknesses;
-    public bool isDead = false;
+    protected int maxHealth;
+    protected int currHealth;
+    protected int attack;
+    protected string type;
+    protected List<string> strengths;
+    protected List<string> weaknesses;
+    protected bool isDead = false;
 
     public string GetCharType() {
         return type;
@@ -21,6 +21,41 @@ public abstract class Character : MonoBehaviour
 
 
     //protected Character() { }
+
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public int getCurrHealth()
+    {
+        return currHealth;
+    }
+
+    public void setCurrHealth(int newHealthVal)
+    {
+        currHealth = newHealthVal;
+    }
+
+    public int getAttack()
+    {
+        return attack;
+    }
+
+    public void setAttack(int newAttackVal)
+    {
+        attack = newAttackVal;
+    }
+
+    public string getCharType()
+    {
+        return type;
+    }
+
+    public bool getIsDead()
+    {
+        return isDead;
+    }
 
     public void AttackEnemy(Character enemy) {
         if (strengths.Contains(enemy.GetCharType()) || enemy.weaknesses.Contains(type)) {

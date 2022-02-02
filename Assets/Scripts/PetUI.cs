@@ -7,7 +7,7 @@ public class PetUI : BattleUI
 
     protected override void OnEnable() {
         base.OnEnable();
-        character = cm.currPet;
+        character = cm.getCurrPet();
 
         //charName.text = character.type;
 
@@ -35,16 +35,16 @@ public class PetUI : BattleUI
 
     // Update is called once per frame
     void Update() {
-        character = cm.currPet;
+        character = cm.getCurrPet();
         // if the player changes pets or takes damage, rewrite the UI
         if (character != null) {
-            if (charName.text != character.type) {
+            if (charName.text != character.getCharType()) {
                 character.gameObject.SetActive(false);
-                character = cm.currPet;
+                character = cm.getCurrPet();
                 character.gameObject.SetActive(true);
                 SetHealthUI();
             }
-            if (currHealth != character.currHealth) {
+            if (currHealth != character.getCurrHealth()) {
                 SetHealthUI();
             }
         } else {

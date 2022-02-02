@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealingItem : Item
 {
-    public int hpIncrease = 5;
+    [SerializeField] private int hpIncrease = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,13 +13,15 @@ public class HealingItem : Item
 
     public override void UseItem(CombatManager combatManager)
     {
-        if (combatManager.currPet.currHealth + hpIncrease >= combatManager.currPet.maxHealth)
+        Pet currPet = combatManager.getCurrPet();
+
+        if (currPet.getCurrHealth() + hpIncrease >= currPet.getMaxHealth())
         {
-            combatManager.currPet.currHealth = combatManager.currPet.maxHealth;
+            currPet.setCurrHealth(currPet.getMaxHealth());
         }
         else
         {
-            combatManager.currPet.currHealth += hpIncrease;
+            currPet.setCurrHealth(currPet.getCurrHealth() + hpIncrease);
         }
     }
 }

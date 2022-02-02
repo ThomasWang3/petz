@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaknessHealthItem : Item
 {
-    public int strAmount = 5;
+    [SerializeField] private int attackAmount = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +13,8 @@ public class WeaknessHealthItem : Item
 
     public override void UseItem(CombatManager combatManager)
     {
-        combatManager.currPet.currHealth = combatManager.currPet.maxHealth;
-        combatManager.currPet.attack -= strAmount;
+        Pet currPet = combatManager.getCurrPet();
+        currPet.setCurrHealth(currPet.getMaxHealth());
+        currPet.setAttack(currPet.getAttack() - attackAmount);
     }
 }
