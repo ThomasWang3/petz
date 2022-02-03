@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class AttackButton : MonoBehaviour
 {
     [SerializeField] private CombatManager cm;
+    [SerializeField] private Button buttonObject;
 
     // Start is called before the first frame update
     void Start() {
         cm = FindObjectOfType<CombatManager>();
+        buttonObject = gameObject.GetComponent<Button>();
     }
 
     // OnClick() function for the button calls attack() from the combatmanager class
@@ -21,7 +23,7 @@ public class AttackButton : MonoBehaviour
 
     private void Update() {
         if(cm.getPetWin() || cm.getHumanWin()) {
-            gameObject.GetComponent<Button>().interactable = false;
+            buttonObject.interactable = false;
         }
     }
 }
