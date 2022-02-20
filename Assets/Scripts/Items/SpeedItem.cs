@@ -13,6 +13,6 @@ public class SpeedItem : Item
 
     public override void UseItem(CombatManager combatManager)
     {
-        //combatManager.SkipEnemyTurn();
+        combatManager.setSkipTurn(true);
     }
 }
