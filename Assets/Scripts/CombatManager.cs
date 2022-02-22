@@ -7,20 +7,27 @@ public class CombatManager : MonoBehaviour {
     [SerializeField] private Pet currPet;
     [SerializeField] private List<Pet> currPets;
     [SerializeField] private int petIndex;
+
     [SerializeField] private Human currHuman;
     [SerializeField] private List<Human> currHumans;
     [SerializeField] private int humanIndex;
-    [SerializeField] private string nextKey = "q";
-    [SerializeField] private string prevKey = "s";
-    [SerializeField] private bool petWin = false;
-    [SerializeField] private bool humanWin = false;
-    [SerializeField] private bool skipTurn = false;
+
     [SerializeField] private Item currItem;
     [SerializeField] private List<Item> currItems;
     [SerializeField] private int itemIndex;
+
+    [SerializeField] private string nextKey = "s";
+    [SerializeField] private string prevKey = "w";
     [SerializeField] private string nextItemKey = "d";
     [SerializeField] private string prevItemKey = "a";
     [SerializeField] private string useItemKey = "e";
+    [SerializeField] private string attackKey = "space";
+
+    [SerializeField] private bool petWin = false;
+    [SerializeField] private bool humanWin = false;
+    [SerializeField] private bool skipTurn = false;
+
+    [SerializeField] private PauseUI pauseUI;
 
     // Start is called before the first frame update
     void Start() {
@@ -28,72 +35,57 @@ public class CombatManager : MonoBehaviour {
         currPet = currPets[petIndex];
         currHuman = currHumans[humanIndex];
         currItem = currItems[itemIndex];
-        // for future purpose either
-        // 1. find a way to change all pets/humans to the same position on the screen 
-        // 2. find a way to have all "inactive" objects to be faded out as opposed to completely invisible
         for (int i = 0; i < currPets.Count; i++) {
-            //currPets[i].transform.position = new Vector3(50 , Screen.height / 2, 0);
             if (currPets[i] != currPet) {
-                currPets[i].gameObject.SetActive(false);
-            } else {
-                currPets[i].gameObject.SetActive(true);
+                currPets[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
             }
         }
         for (int i = 0; i < currHumans.Count; i++) {
-            //currHumans[i].transform.position = new Vector3(FindObjectOfType<Camera>().transform.position.x - 50, Screen.height / 2 / 2, 0);
             if (currHumans[i] != currHuman) {
-                currHumans[i].gameObject.SetActive(false);
-            } else {
-                currHumans[i].gameObject.SetActive(true);
+                currHumans[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
             }
         }
         for (int i = 0; i < currItems.Count; i++)
         {
-            if (currItems[i] != currItem)
-            {
-                currItems[i].gameObject.SetActive(false);
-            }
-            else
-            {
-                currItems[i].gameObject.SetActive(true);
+            if (currItems[i] != currItem) {
+                currItems[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
             }
         }
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(prevKey)) {
-            //Debug.Log("W key pressed");
-            previous();
-        }
-        if (Input.GetKeyDown(nextKey)) {
-            //Debug.Log("S key pressed");
-            next();
-        }
-        if (Input.GetKeyDown(prevItemKey))
-        {
-            //Debug.Log("A key pressed");
-            previousItem();
-        }
-        if (Input.GetKeyDown(nextItemKey))
-        {
-            //Debug.Log("D key pressed");
-            nextItem();
-        }
-        if (Input.GetKeyDown(useItemKey))
-        {
-            //pass the item the combat manager so the item's actions can be carried out
-            if (currItem != null)
-            {
+        if (!pauseUI.IsPaused()) {
+            if (Input.GetKeyDown(prevKey)) {
+                //Debug.Log("W key pressed");
+                Previous();
+            } else 
+            if (Input.GetKeyDown(nextKey)) {
+                //Debug.Log("S key pressed");
+                Next();
+            } else
+            if (Input.GetKeyDown(prevItemKey)) {
+                //Debug.Log("A key pressed");
+                PreviousItem();
+            } else
+            if (Input.GetKeyDown(nextItemKey)) {
+                //Debug.Log("D key pressed");
+                NextItem();
+            } else
+            if (Input.GetKeyDown(useItemKey) && currItem != null) {
+                //pass the item the combat manager so the item's actions can be carried out
                 currItem.UseItem(this);
                 removeItem();
+                // since a player can use an item and attack, we don't call humanAttack() afterwards
+                //humanAttack();
+            } else
+            if (Input.GetKeyDown(attackKey)) {
+                //Debug.Log("space button pressed");
+                petAttack();
+                humanAttack();
             }
-            else
-            {
-                //do nothing
-            }
-            
         }
+        
     }
 
     public Pet getCurrPet()
@@ -132,60 +124,51 @@ public class CombatManager : MonoBehaviour {
     }
 
     // goes to next pet if nextKey ("a") is pressed
-    void next() {
+    void Next() {
         //Debug.Log("next function");
         if (petIndex < (currPets.Count - 1)) {
+            currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             petIndex++;
-            currPet.gameObject.SetActive(false);
             currPet = currPets[petIndex];
-        } else {
-            //do nothing
+            currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
     }
 
     //goes to previous pet if prevKey ("d") is pressed
-    void previous() {
+    void Previous() {
         //Debug.Log("previous function");
         if (petIndex > 0) {
+            currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             petIndex--;
-            currPet.gameObject.SetActive(false);
             currPet = currPets[petIndex];
-        } else {
-            //do nothing
+            currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
     }
 
-    void nextItem()
+    void NextItem()
     {
         if (itemIndex < (currItems.Count - 1))
         {
+            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             itemIndex++;
-            currItem.gameObject.SetActive(false);
+            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
             currItem = currItems[itemIndex];
-        }
-        else
-        {
-            //do nothing 
         }
     }
 
-    void previousItem()
+    void PreviousItem()
     {
-        if (itemIndex > 0)
-        {
+        if (itemIndex > 0) {
+            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             itemIndex--;
-            currItem.gameObject.SetActive(false);
+            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
             currItem = currItems[itemIndex];
-        }
-        else
-        {
-            //do nothing 
         }
     }
 
     // facilitates attack (currently pet goes first, then human)
     // in the future, maybe implement speed stat and/or item usage 
-    public void attack() {
+    public void petAttack() {
         // tentatively (both attack at the same time), player first
         // maybe implement animation between these in order to facilitate "turn order"
         //Debug.Log(currPet.type + " is attacking " + currHuman.type);
@@ -198,22 +181,21 @@ public class CombatManager : MonoBehaviour {
             return;
         }
 
+        
+    }
+
+    public void humanAttack() {
         //Debug.Log(currHuman.type + " is attacking " + currPet.type);
-        if (skipTurn == false)
-        {
+        if (skipTurn == false) {
             currHuman.AttackEnemy(currPet);
-            if (currPet.getIsDead())
-            {
+            if (currPet.getIsDead()) {
                 removePet();
             }
-            if (currPets.Count == 0)
-            {
+            if (currPets.Count == 0) {
                 humanWin = true;
                 return;
             }
-        }
-        else
-        {
+        } else {
             skipTurn = false;
         }
     }
@@ -235,6 +217,7 @@ public class CombatManager : MonoBehaviour {
                 petIndex--;
             }
             currPet = currPets[petIndex];
+            currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
     }
 
@@ -253,6 +236,8 @@ public class CombatManager : MonoBehaviour {
                 humanIndex--;
             }
             currHuman = currHumans[humanIndex];
+            currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+
         }
     }
 
@@ -275,6 +260,7 @@ public class CombatManager : MonoBehaviour {
                 itemIndex--;
             }
             currItem = currItems[itemIndex];
+            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
     }
 }
