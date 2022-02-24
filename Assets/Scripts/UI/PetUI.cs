@@ -6,20 +6,35 @@ using UnityEngine;
 public class PetUI : BattleUI 
 {
 
-    protected override void OnEnable() {
-        base.OnEnable();
-        character = cm.getCurrPet();
+    protected void OnEnable() {
+        if (cm != null){
+            character = cm.getCurrPet();
+        } else 
+        if (mcm != null){
+            character = mcm.getCurrPet();
+        }
     }
 
 
     // Update is called once per frame
     void Update() {
-        character = cm.getCurrPet();
+        if (cm != null){
+            character = cm.getCurrPet();
+        } else 
+        if (mcm != null){
+            character = mcm.getCurrPet();
+        }
+
         // if the player changes pets or takes damage, rewrite the UI
         if (character != null) {
             if (charName.text != character.getName()) {
                 character.gameObject.SetActive(false);
-                character = cm.getCurrPet();
+                if (cm != null){
+                    character = cm.getCurrPet();
+                } else 
+                if (mcm != null){
+                    character = mcm.getCurrPet();
+                }
                 character.gameObject.SetActive(true);
                 SetHealthUI();
             }

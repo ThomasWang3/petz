@@ -18,12 +18,18 @@ public class BattleUI : MonoBehaviour
     protected Color fullHealthColor = Color.green;
     protected Color zeroHealthColor = Color.red;
 
-    protected CombatManager cm;
+    [SerializeField] protected CombatManager cm;
+    [SerializeField] protected MultiplayerCombatManager mcm;
     protected Character character;
 
-    protected virtual void OnEnable() {
-        cm = FindObjectOfType<CombatManager>();
-    }
+    /*protected virtual void OnEnable() {
+        if (cm != null){
+            cm = FindObjectOfType<CombatManager>();
+        } else 
+        if (mcm != null){
+            mcm = FindObjectOfType<MultiplayerCombatManager>();
+        }
+    }*/
     
     // updates the health UI when called
     public void SetHealthUI() {
