@@ -8,6 +8,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected int maxHealth;
     [SerializeField] protected int currHealth;
     [SerializeField] protected int attack;
+    [SerializeField] protected string name;
     [SerializeField] protected string type;
     [SerializeField] protected List<string> strengths;
     [SerializeField] protected List<string> weaknesses;
@@ -40,8 +41,10 @@ public abstract class Character : MonoBehaviour
         attack = newAttackVal;
     }
 
-    public string getCharType()
-    {
+    public string getName() {
+        return name;
+    }
+    public string getCharType() {
         return type;
     }
 

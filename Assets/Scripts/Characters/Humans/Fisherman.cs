@@ -7,7 +7,8 @@ public class Fisherman : Human {
     // Start is called before the first frame update
     public void Start() {
         currHealth = maxHealth;
-        type = "fisherman";
+        name = "fisherman";
+        type = "fish";
         strengths.Add("snake");
         weaknesses.Add("bird");
     }

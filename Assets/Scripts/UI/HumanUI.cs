@@ -16,7 +16,7 @@ public class HumanUI : BattleUI
         character = cm.getCurrHuman();
         // if the player changes pets or takes damage, rewrite the UI
         if (character != null) {
-            if (charName.text != character.getCharType()) {
+            if (charName.text != character.getName()) {
                 character.gameObject.SetActive(false);
                 character = cm.getCurrHuman();
                 character.gameObject.SetActive(true);

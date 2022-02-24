@@ -169,8 +169,6 @@ public class CombatManager : MonoBehaviour {
     // facilitates attack (currently pet goes first, then human)
     // in the future, maybe implement speed stat and/or item usage 
     public void petAttack() {
-        // tentatively (both attack at the same time), player first
-        // maybe implement animation between these in order to facilitate "turn order"
         //Debug.Log(currPet.type + " is attacking " + currHuman.type);
         currPet.AttackEnemy(currHuman);
         if (currHuman.getIsDead()) {
@@ -178,6 +176,7 @@ public class CombatManager : MonoBehaviour {
         }
         if (currHumans.Count == 0) {
             petWin = true;
+            pauseUI.Pause();
             return;
         }
 
@@ -193,6 +192,7 @@ public class CombatManager : MonoBehaviour {
             }
             if (currPets.Count == 0) {
                 humanWin = true;
+                pauseUI.Pause();
                 return;
             }
         } else {

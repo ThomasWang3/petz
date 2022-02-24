@@ -7,6 +7,7 @@ using UnityEngine;
 public class BattleUI : MonoBehaviour
 {
     [SerializeField] protected Text charName;
+    [SerializeField] protected Text charType;
     [SerializeField] protected Text hp;
 
     [SerializeField] protected float maxHealth;
@@ -26,7 +27,8 @@ public class BattleUI : MonoBehaviour
     
     // updates the health UI when called
     public void SetHealthUI() {
-        charName.text = character.getCharType();
+        charName.text = character.getName();
+        charType.text = character.getCharType();
 
         maxHealth = character.getMaxHealth();
         slider.maxValue = maxHealth;

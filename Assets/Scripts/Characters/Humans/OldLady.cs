@@ -7,7 +7,8 @@ public class OldLady : Human {
     // Start is called before the first frame update
     public void Start() {
         currHealth = maxHealth;
-        type = "OldLady";
+        name = "OldLady";
+        type = "cat";
         strengths.Add("bird");
         weaknesses.Add("dog");
     }

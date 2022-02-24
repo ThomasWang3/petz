@@ -7,6 +7,7 @@ public class Bird : Pet{
     // Start is called before the first frame update
     public void Start() {
         currHealth = maxHealth;
+        name = "bird";
         type = "bird";
         strengths.Add("fish");
         weaknesses.Add("cat");
