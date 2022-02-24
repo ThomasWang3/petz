@@ -7,6 +7,7 @@ public class PauseUI : MonoBehaviour {
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button buttonObject;
     [SerializeField] private bool paused = false;
+    [SerializeField] private Text pausedText;
 
     public bool IsPaused() {
         return paused;
@@ -26,6 +27,14 @@ public class PauseUI : MonoBehaviour {
             paused = false;
 
         }
+    }
+
+    public void Win() {
+        pauseUI.SetActive(true);
+        pausedText.gameObject.SetActive(false);
+        Time.timeScale = 0;
+        paused = false;
+
     }
 
     public void Quit() {

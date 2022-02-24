@@ -176,7 +176,7 @@ public class CombatManager : MonoBehaviour {
         }
         if (currHumans.Count == 0) {
             petWin = true;
-            pauseUI.Pause();
+            pauseUI.Win();
             return;
         }
 
@@ -192,7 +192,7 @@ public class CombatManager : MonoBehaviour {
             }
             if (currPets.Count == 0) {
                 humanWin = true;
-                pauseUI.Pause();
+                pauseUI.Win();
                 return;
             }
         } else {

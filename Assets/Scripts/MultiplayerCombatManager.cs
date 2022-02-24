@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Author(s): Thomas Wang, Logan Mikulski, Ashley Sun
 public class MultiplayerCombatManager : MonoBehaviour {
@@ -28,6 +29,7 @@ public class MultiplayerCombatManager : MonoBehaviour {
     [SerializeField] private bool skipTurn = false;
     [SerializeField] private bool p1Turn = true;
 
+    [SerializeField] private Text playerText;
 
     [SerializeField] private PauseUI pauseUI;
 
@@ -71,6 +73,8 @@ public class MultiplayerCombatManager : MonoBehaviour {
                     //Debug.Log("space button pressed");
                     petAttack();
                     p1Turn = false;
+                    playerText.text = "Player 2's Turn";
+                    playerText.alignment = TextAnchor.MiddleRight;
                 }
             }
             else {
@@ -86,6 +90,8 @@ public class MultiplayerCombatManager : MonoBehaviour {
                     //Debug.Log("Left Shift pressed");
                     humanAttack();
                     p1Turn = true;
+                    playerText.text = "Player 1's Turn";
+                    playerText.alignment = TextAnchor.MiddleLeft;
                 }
             }
         }
@@ -204,6 +210,7 @@ public class MultiplayerCombatManager : MonoBehaviour {
         }
         if (currHumans.Count == 0) {
             petWin = true;
+            pauseUI.Win();
             return;
         }
 
@@ -219,6 +226,7 @@ public class MultiplayerCombatManager : MonoBehaviour {
             }
             if (currPets.Count == 0) {
                 humanWin = true;
+                pauseUI.Win();
                 return;
             }
         } else {
