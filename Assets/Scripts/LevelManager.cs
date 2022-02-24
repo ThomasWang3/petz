@@ -22,22 +22,27 @@ public class LevelManager : MonoBehaviour
     public void NextLevel() {
         currentLevelIndex++;
         LoadLevelWithIndex(currentLevelIndex);
+        Time.timeScale = 1;
     }
     public void PreviousLevel() {
         currentLevelIndex--;
         LoadLevelWithIndex(currentLevelIndex);
+        Time.timeScale = 1;
     }
 
     public void RestartLevel() {
         LoadLevelWithIndex(currentLevelIndex);
+        Time.timeScale = 1;
     }
 
     public void NewGame() {
         currentLevelIndex = 1;
         LoadLevelWithIndex(currentLevelIndex);
+        Time.timeScale = 1;
     }
 
     public void LoadMainMenu() {
         LoadLevelWithIndex(0);
+        Time.timeScale = 1;
     }
 }

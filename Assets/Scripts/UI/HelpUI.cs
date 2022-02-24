@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Author(s): Thomas Wang
 public class HelpUI : MonoBehaviour {
     [SerializeField] private GameObject helpUI;
     //[SerializeField] private Button buttonObject;
@@ -10,11 +11,6 @@ public class HelpUI : MonoBehaviour {
     [SerializeField] private List<Text> texts;
     [SerializeField] private int textIndex;
 
-    // Start is called before the first frame update
-    //void Start()
-    //{
-
-    //}
     public bool IsHelp() {
         return help;
     }

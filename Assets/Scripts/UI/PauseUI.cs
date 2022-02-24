@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Author(s): Thomas Wang
 public class PauseUI : MonoBehaviour {
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button buttonObject;
@@ -34,7 +35,6 @@ public class PauseUI : MonoBehaviour {
         pausedText.gameObject.SetActive(false);
         Time.timeScale = 0;
         paused = false;
-
     }
 
     public void Quit() {

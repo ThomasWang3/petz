@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Author(s): Thomas Wang, Logan Mikulski, Ashley Sun
+// Author(s): Ashley Sun
 public class MultiplayerCombatManager : MonoBehaviour {
     [SerializeField] private Pet currPet;
     [SerializeField] private List<Pet> currPets;
@@ -13,15 +13,8 @@ public class MultiplayerCombatManager : MonoBehaviour {
     [SerializeField] private List<Human> currHumans;
     [SerializeField] private int humanIndex;
 
-    // [SerializeField] private Item currItem;
-    // [SerializeField] private List<Item> currItems;
-    // [SerializeField] private int itemIndex;
-
     [SerializeField] private string nextKey = "s";
     [SerializeField] private string prevKey = "w";
-    // [SerializeField] private string nextItemKey = "d";
-    // [SerializeField] private string prevItemKey = "a";
-    // [SerializeField] private string useItemKey = "e";
     [SerializeField] private string attackKey = "space";
 
     [SerializeField] private bool petWin = false;
@@ -49,12 +42,6 @@ public class MultiplayerCombatManager : MonoBehaviour {
                 currHumans[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
             }
         }
-        // for (int i = 0; i < currItems.Count; i++)
-        // {
-        //     if (currItems[i] != currItem) {
-        //         currItems[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
-        //     }
-        // }
     }
 
     // Update is called once per frame
@@ -62,15 +49,12 @@ public class MultiplayerCombatManager : MonoBehaviour {
         if (!pauseUI.IsPaused()) {
             if (p1Turn){
                 if (Input.GetKeyDown(prevKey)) {
-                    //Debug.Log("W key pressed");
                     PreviousPet();
                 } else 
                 if (Input.GetKeyDown(nextKey)) {
-                    //Debug.Log("S key pressed");
                     NextPet();
                 } else
                 if (Input.GetKeyDown(attackKey)) {
-                    //Debug.Log("space button pressed");
                     petAttack();
                     p1Turn = false;
                     playerText.text = "Player 2's Turn";
@@ -79,15 +63,12 @@ public class MultiplayerCombatManager : MonoBehaviour {
             }
             else {
                 if (Input.GetKeyDown(KeyCode.UpArrow)) {
-                    //Debug.Log("Up Arrow key pressed");
                     PreviousHuman();
                 } else 
                 if (Input.GetKeyDown(KeyCode.DownArrow)) {
-                    //Debug.Log("Down Arrow key pressed");
                     NextHuman();
                 } else
                 if (Input.GetKeyDown(KeyCode.RightShift)) {
-                    //Debug.Log("Left Shift pressed");
                     humanAttack();
                     p1Turn = true;
                     playerText.text = "Player 1's Turn";
@@ -177,26 +158,6 @@ public class MultiplayerCombatManager : MonoBehaviour {
         }
     }
 
-/*    void NextItem()
-    {
-        if (itemIndex < (currItems.Count - 1))
-        {
-            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
-            itemIndex++;
-            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
-            currItem = currItems[itemIndex];
-        }
-    }
-
-    void PreviousItem()
-    {
-        if (itemIndex > 0) {
-            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
-            itemIndex--;
-            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
-            currItem = currItems[itemIndex];
-        }
-    }*/
 
     // facilitates attack (currently pet goes first, then human)
     // in the future, maybe implement speed stat and/or item usage 
@@ -218,7 +179,6 @@ public class MultiplayerCombatManager : MonoBehaviour {
     }
 
     public void humanAttack() {
-        //Debug.Log(currHuman.type + " is attacking " + currPet.type);
         if (skipTurn == false) {
             currHuman.AttackEnemy(currPet);
             if (currPet.getIsDead()) {
@@ -274,27 +234,4 @@ public class MultiplayerCombatManager : MonoBehaviour {
 
         }
     }
-
-    /*private void removeItem()
-    {
-        // only one item remaining
-        if (currItems.Count == 1)
-        {
-            currItem.gameObject.SetActive(false);
-            currItems.Remove(currItem);
-            currItem = null;
-        }
-        else
-        {
-            currItem.gameObject.SetActive(false);
-            currItems.Remove(currItem);
-            // more than one pet remaining, need to check if we are removing the last pet of the list, then decrement the index before reassigning the new pet
-            if (itemIndex == currItems.Count)
-            {
-                itemIndex--;
-            }
-            currItem = currItems[itemIndex];
-            currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
-        }
-    }*/
 }

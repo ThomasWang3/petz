@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Author(s): Thomas Wang, Logan Mikulski
+// Author(s): Thomas Wang, Logan Mikulski, Daniel J. Garcia
 public class CombatManager : MonoBehaviour {
     [SerializeField] private Pet currPet;
     [SerializeField] private List<Pet> currPets;
@@ -33,6 +33,7 @@ public class CombatManager : MonoBehaviour {
 
     [SerializeField] private PauseUI pauseUI;
 
+    // Author(s): Thomas Wang
     // Start is called before the first frame update
     void Start() {
         //need to fill pets array and humans array with all pets and humans in current fight
@@ -58,23 +59,20 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    // Author(s): Thomas Wang
     // Update is called once per frame
     void Update() {
         if (!pauseUI.IsPaused()) {
             if (Input.GetKeyDown(prevKey)) {
-                //Debug.Log("W key pressed");
                 Previous();
             } else 
             if (Input.GetKeyDown(nextKey)) {
-                //Debug.Log("S key pressed");
                 Next();
             } else
             if (Input.GetKeyDown(prevItemKey)) {
-                //Debug.Log("A key pressed");
                 PreviousItem();
             } else
             if (Input.GetKeyDown(nextItemKey)) {
-                //Debug.Log("D key pressed");
                 NextItem();
             } else
             if (Input.GetKeyDown(useItemKey) && currItem != null) {
@@ -129,6 +127,7 @@ public class CombatManager : MonoBehaviour {
         skipTurn = true;
     }
 
+    // Author(s): Thomas Wang
     // goes to next pet if nextKey ("a") is pressed
     void Next() {
         //Debug.Log("next function");
@@ -140,6 +139,7 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    // Author(s): Thomas Wang
     //goes to previous pet if prevKey ("d") is pressed
     void Previous() {
         //Debug.Log("previous function");
@@ -151,8 +151,10 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    void NextItem()
-    {
+
+
+    // Author(s): Logan Mikulski
+    void NextItem() {
         if (itemIndex < (currItems.Count - 1))
         {
             currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
@@ -162,8 +164,8 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    void PreviousItem()
-    {
+    // Author(s): Logan Mikulski
+    void PreviousItem() {
         if (itemIndex > 0) {
             currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             itemIndex--;
@@ -206,6 +208,7 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    // Author(s): Daniel J. Garcia
     //Ensures that the current human isn't in the danger state, and if all humans are in danger, no effect is taken.
     private void humanSafety()
     {
@@ -234,6 +237,7 @@ public class CombatManager : MonoBehaviour {
     }
 
 
+    // Author(s): Thomas Wang
     // used to remove a pet from the list when the pet dies, allowing the right pet to be selected afterwards
     private void removePet() {
         // only one pet remaining
@@ -254,6 +258,7 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    // Author(s): Thomas Wang
     // used to remove a human from the list when the human dies, allowing the right human to be selected afterwards
     private void removeHuman() {
         // only one pet remaining
@@ -274,6 +279,7 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    // Author(s): Thomas Wang
     private void removeItem()
     {
         // only one item remaining

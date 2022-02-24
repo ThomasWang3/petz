@@ -77,12 +77,13 @@
     <Compile Include="Assets\Scripts\UI\PetUI.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Fish.cs" />
     <Compile Include="Assets\Scripts\Characters\Humans\Veteran.cs" />
+    <Compile Include="Assets\Scripts\MultiplayerCombatManager.cs" />
     <Compile Include="Assets\Scripts\UI\VictoryUI.cs" />
     <Compile Include="Assets\Scripts\Items\HealingItem.cs" />
     <Compile Include="Assets\Scripts\Items\BloodStrengthItem.cs" />
     <Compile Include="Assets\Scripts\UI\HumanUI.cs" />
     <Compile Include="Assets\Scripts\Items\StrengthItem.cs" />
-    <Compile Include="Assets\Scripts\MultiplayerCombatManager.cs" />
+    <Compile Include="Assets\Scripts\Characters\MovementAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
