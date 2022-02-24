@@ -5,7 +5,7 @@ using UnityEngine;
 
 // Author(s): Thomas Wang
 [CreateAssetMenu(fileName = "levelManager", menuName = "LevelManager")]
-public class LevelManager : UnityEngine.ScriptableObject
+public class LevelManager : MonoBehaviour
 {
     public string[] levels;
     public int currentLevelIndex = 0;
@@ -38,7 +38,6 @@ public class LevelManager : UnityEngine.ScriptableObject
     }
 
     public void LoadMainMenu() {
-        currentLevelIndex = 0;
-        LoadLevelWithIndex(currentLevelIndex);
+        LoadLevelWithIndex(0);
     }
 }

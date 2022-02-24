@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Items\BloodStrengthItem.cs" />
     <Compile Include="Assets\Scripts\UI\HumanUI.cs" />
     <Compile Include="Assets\Scripts\Items\StrengthItem.cs" />
+    <Compile Include="Assets\Scripts\MultiplayerCombatManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
