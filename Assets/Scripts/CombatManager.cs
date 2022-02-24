@@ -25,6 +25,10 @@ public class CombatManager : MonoBehaviour {
 
     [SerializeField] private bool petWin = false;
     [SerializeField] private bool humanWin = false;
+    //I'll store the number of humans in the list. As each one enters the danger state, the number will decrease, and characters will switch.
+    //When it hits zero, humanDanger will be true. Once this occurs, gameplay will proceed as normal.
+    //[SerializeField] private bool humanDanger = false;
+    [SerializeField] private int safeHumans;
     [SerializeField] private bool skipTurn = false;
 
     [SerializeField] private PauseUI pauseUI;
@@ -35,6 +39,7 @@ public class CombatManager : MonoBehaviour {
         currPet = currPets[petIndex];
         currHuman = currHumans[humanIndex];
         currItem = currItems[itemIndex];
+        safeHumans = currHumans.Count;
         for (int i = 0; i < currPets.Count; i++) {
             if (currPets[i] != currPet) {
                 currPets[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
@@ -82,6 +87,7 @@ public class CombatManager : MonoBehaviour {
             if (Input.GetKeyDown(attackKey)) {
                 //Debug.Log("space button pressed");
                 petAttack();
+                humanSafety();
                 humanAttack();
             }
         }
@@ -197,6 +203,33 @@ public class CombatManager : MonoBehaviour {
             }
         } else {
             skipTurn = false;
+        }
+    }
+
+    //Ensures that the current human isn't in the danger state, and if all humans are in danger, no effect is taken.
+    private void humanSafety()
+    {
+        if (safeHumans > 0 && (currHuman.isInDanger() == true))
+        {
+            safeHumans -= 1;
+
+            while (currHuman.isInDanger() && safeHumans > 0)
+            {
+                if (humanIndex == currHumans.Count)
+                {
+                    currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
+                    humanIndex = 0;
+                    currHuman = currHumans[humanIndex];
+                    currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+                }
+                else
+                {
+                    currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
+                    humanIndex += 1;
+                    currHuman = currHumans[humanIndex];
+                    currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+                }
+            }
         }
     }
 
