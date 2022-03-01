@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Items\Item.cs" />
+    <Compile Include="Assets\Scripts\Characters\MovementAI.cs" />
     <Compile Include="Assets\Scripts\Characters\OverworldMovement.cs" />
     <Compile Include="Assets\Scripts\UI\BattleUI.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
@@ -80,10 +81,9 @@
     <Compile Include="Assets\Scripts\MultiplayerCombatManager.cs" />
     <Compile Include="Assets\Scripts\UI\VictoryUI.cs" />
     <Compile Include="Assets\Scripts\Items\HealingItem.cs" />
-    <Compile Include="Assets\Scripts\Items\BloodStrengthItem.cs" />
+    <Compile Include="Assets\Scripts\Items\BerserkItem.cs" />
     <Compile Include="Assets\Scripts\UI\HumanUI.cs" />
     <Compile Include="Assets\Scripts\Items\StrengthItem.cs" />
-    <Compile Include="Assets\Scripts\Characters\MovementAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

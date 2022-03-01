@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Author(s): Logan Mikulski
-public class BloodStrengthItem : Item
+public class BerserkItem : Item
 {
     // Start is called before the first frame update
     void Start()
     {
-        itemName = "Blood for Strength Pill";
+        itemName = "Berserk Pill";
     }
 
     public override void UseItem(CombatManager combatManager)
