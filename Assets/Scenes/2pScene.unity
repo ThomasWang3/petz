@@ -2563,9 +2563,13 @@ PrefabInstance:
       value: -6.9
       objectReference: {fileID: 0}
     - target: {fileID: 8729511961843729777, guid: 28766ca52889e804f83732fba8c38ba5, type: 3}
-      propertyPath: mcm
+      propertyPath: cm
       value: 
       objectReference: {fileID: 1695947241}
+    - target: {fileID: 8729511961843729777, guid: 28766ca52889e804f83732fba8c38ba5, type: 3}
+      propertyPath: mcm
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8729511961843729782, guid: 28766ca52889e804f83732fba8c38ba5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2961,7 +2965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cm: {fileID: 0}
-  mcm: {fileID: 1695947241}
+  mcm: {fileID: 0}
   victoryText: {fileID: 1483188309}
 --- !u!114 &1483188309
 MonoBehaviour:
@@ -3457,9 +3461,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695947240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3ff19af13cdc47999ef80aa21bdad6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cb3c7c452bc7e44daa03f8e19e23db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplayer: 1
+  p1Turn: 1
   currPet: {fileID: 0}
   currPets:
   - {fileID: 587968817}
@@ -3476,14 +3482,26 @@ MonoBehaviour:
   - {fileID: 1737299170}
   - {fileID: 1761513113}
   humanIndex: 0
-  nextKey: s
-  prevKey: w
-  attackKey: space
+  currItem: {fileID: 0}
+  currItems: []
+  itemIndex: 0
+  p1PrevKey: 119
+  p1NextKey: 115
+  prevItemKey: 0
+  nextItemKey: 0
+  useItemKey: 0
+  p1AttackKey: 32
+  p2PrevKey: 273
+  p2NextKey: 274
+  p2AttackKey: 303
+  turnText: {fileID: 493888077}
   petWin: 0
   humanWin: 0
+  isAttacking: 0
+  aiDelay: 0.5
+  playerDelay: 1
+  safeHumans: 0
   skipTurn: 0
-  p1Turn: 1
-  playerText: {fileID: 493888077}
   pauseUI: {fileID: 1564611345}
 --- !u!4 &1695947242
 Transform:
@@ -4006,7 +4024,6 @@ GameObject:
   - component: {fileID: 1940022294}
   - component: {fileID: 1940022296}
   - component: {fileID: 1940022297}
-  - component: {fileID: 1940022295}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -4028,25 +4045,6 @@ Transform:
   m_Father: {fileID: 2043066831}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1940022295
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940022293}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 78ca97d49a239284ca7d471f12e8b51e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1940022296
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4418,9 +4416,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 1761833824}
     m_Modifications:
     - target: {fileID: 243360051695765173, guid: 5a1efb2e63f01d14fb1100f7c7a95cce, type: 3}
-      propertyPath: mcm
+      propertyPath: cm
       value: 
       objectReference: {fileID: 1695947241}
+    - target: {fileID: 243360051695765173, guid: 5a1efb2e63f01d14fb1100f7c7a95cce, type: 3}
+      propertyPath: mcm
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8810697068663919629, guid: 5a1efb2e63f01d14fb1100f7c7a95cce, type: 3}
       propertyPath: m_SizeDelta.x
       value: 92.7298

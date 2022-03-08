@@ -19,19 +19,11 @@ public class BattleUI : MonoBehaviour
     protected Color zeroHealthColor = Color.red;
 
     [SerializeField] protected CombatManager cm;
-    [SerializeField] protected MultiplayerCombatManager mcm;
+    //[SerializeField] protected MultiplayerCombatManager mcm;
     protected Character character;
 
-    /*protected virtual void OnEnable() {
-        if (cm != null){
-            cm = FindObjectOfType<CombatManager>();
-        } else 
-        if (mcm != null){
-            mcm = FindObjectOfType<MultiplayerCombatManager>();
-        }
-    }*/
-    
-    // updates the health UI when called
+    protected virtual void updateChar() { }
+
     public void SetHealthUI() {
         charName.text = character.getName();
         charType.text = character.getCharType();
@@ -45,6 +37,27 @@ public class BattleUI : MonoBehaviour
         hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
         fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
         
+    }
+
+    protected void Update() {
+        updateChar();
+        if (character != null) {
+            if (charName.text != character.getName()) {
+                character.gameObject.SetActive(false);
+                updateChar();
+                character.gameObject.SetActive(true);
+                SetHealthUI();
+            }
+            if (currHealth != character.getCurrHealth()) {
+                SetHealthUI();
+            }
+        } else {
+            // used to check if the last pet is null, and then appropriately change the HP text to 0/maxHealth;
+            currHealth = 0;
+            slider.value = currHealth;
+            hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
+            fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
+        }
     }
 
 }

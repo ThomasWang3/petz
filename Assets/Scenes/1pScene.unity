@@ -892,6 +892,7 @@ RectTransform:
   - {fileID: 1329646638}
   - {fileID: 82448257}
   - {fileID: 2091986574}
+  - {fileID: 1285980414}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2620,6 +2621,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200300233}
   m_CullTransparentMesh: 1
+--- !u!1 &1285980411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1285980414}
+  - component: {fileID: 1285980413}
+  - component: {fileID: 1285980412}
+  m_Layer: 5
+  m_Name: PlayerText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1285980412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285980411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+    m_FontSize: 68
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 114
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Player 1''s Turn
+
+'
+--- !u!222 &1285980413
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285980411}
+  m_CullTransparentMesh: 1
+--- !u!224 &1285980414
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285980411}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 372377454}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -6.438843, y: 286.90308}
+  m_SizeDelta: {x: 918.1643, y: 62.1938}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1316156718
 GameObject:
   m_ObjectHideFlags: 0
@@ -4283,6 +4365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb3c7c452bc7e44daa03f8e19e23db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplayer: 1
+  p1Turn: 1
   currPet: {fileID: 0}
   currPets:
   - {fileID: 637086673}
@@ -4293,11 +4377,11 @@ MonoBehaviour:
   petIndex: 0
   currHuman: {fileID: 0}
   currHumans:
-  - {fileID: 1316156721}
-  - {fileID: 1382957959}
-  - {fileID: 1054044920}
-  - {fileID: 1401619456}
   - {fileID: 1901371711}
+  - {fileID: 1401619456}
+  - {fileID: 1054044920}
+  - {fileID: 1382957959}
+  - {fileID: 1316156721}
   humanIndex: 0
   currItem: {fileID: 0}
   currItems:
@@ -4307,14 +4391,21 @@ MonoBehaviour:
   - {fileID: 692754502}
   - {fileID: 5779914}
   itemIndex: 0
-  nextKey: s
-  prevKey: w
-  nextItemKey: d
-  prevItemKey: a
-  useItemKey: e
-  attackKey: space
+  p1PrevKey: 119
+  p1NextKey: 115
+  prevItemKey: 97
+  nextItemKey: 100
+  useItemKey: 101
+  p1AttackKey: 32
+  p2PrevKey: 273
+  p2NextKey: 274
+  p2AttackKey: 303
+  turnText: {fileID: 1285980412}
   petWin: 0
   humanWin: 0
+  isAttacking: 0
+  aiDelay: 0.5
+  playerDelay: 1
   safeHumans: 0
   skipTurn: 0
   pauseUI: {fileID: 1329646642}

@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 // Author(s): Thomas Wang
-[CreateAssetMenu(fileName = "levelManager", menuName = "LevelManager")]
 public class LevelManager : MonoBehaviour
 {
     public string[] levels;
