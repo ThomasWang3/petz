@@ -5,7 +5,14 @@ using UnityEngine;
 // Author(s): Logan Mikulski
 public class StrengthItem : Item
 {
-    [SerializeField] private int attackIncrease = 5;
+    [SerializeField] private int attackIncrease;
+
+    public override string getItemDescription() {
+        return "Attack increased by " + attackIncrease;
+    }
+    override public string getShortDescription() {
+        return "(ATK+)";
+    }
     // Start is called before the first frame update
     void Start()
     {

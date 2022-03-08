@@ -8,7 +8,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected int maxHealth;
     [SerializeField] protected int currHealth;
     [SerializeField] protected int attack;
-    [SerializeField] protected string name;
+    [SerializeField] protected new string name;
     [SerializeField] protected string type;
     [SerializeField] protected List<string> strengths;
     [SerializeField] protected List<string> weaknesses;
@@ -53,21 +53,22 @@ public abstract class Character : MonoBehaviour
         return isDead;
     }
 
-    public void AttackEnemy(Character enemy) {
+    public int AttackEnemy(Character enemy) {
         if (strengths.Contains(enemy.getCharType()) || enemy.weaknesses.Contains(type)) {
-            enemy.TakeDamage(2 * attack);
-        } else if (weaknesses.Contains(enemy.getCharType()) || enemy.strengths.Contains(type)) { 
-            enemy.TakeDamage(attack / 2);
+            return enemy.TakeDamage(2 * attack);
+        } else if (weaknesses.Contains(enemy.getCharType()) || enemy.strengths.Contains(type)) {
+            return enemy.TakeDamage(attack / 2);
         } else {
-            enemy.TakeDamage(attack);
+            return enemy.TakeDamage(attack);
         }
     }
 
-    public void TakeDamage(int damageTaken) {
+    public int TakeDamage(int damageTaken) {
         currHealth -= damageTaken;
         if(currHealth <= 0) {
             isDead = true;
         }
+        return damageTaken;
     }
 
 

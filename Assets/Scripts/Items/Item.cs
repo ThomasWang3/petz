@@ -19,5 +19,9 @@ public abstract class Item : MonoBehaviour
         return itemName;
     }
 
+    public virtual string getItemDescription() { return null; }
+    public virtual string getShortDescription() { return null; }
+
+
     public abstract void UseItem(CombatManager combatManager);
 }

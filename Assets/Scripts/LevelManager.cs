@@ -7,7 +7,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public string[] levels;
-    public int currentLevelIndex = 0;
+    public int currentLevelIndex;
     //GameObject pauseUI = GameObject.Find("PauseUI");
 
 

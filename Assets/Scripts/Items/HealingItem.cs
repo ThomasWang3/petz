@@ -5,7 +5,13 @@ using UnityEngine;
 // Author(s): Logan Mikulski
 public class HealingItem : Item
 {
-    [SerializeField] private int hpIncrease = 5;
+    [SerializeField] private int hpIncrease;
+    public override string getItemDescription() {
+        return "Health increased by " + hpIncrease;
+    }
+    override public string getShortDescription() {
+        return "(HP+)";
+    }
     // Start is called before the first frame update
     void Start()
     {

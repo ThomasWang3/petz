@@ -65,6 +65,8 @@ public class CombatManager : MonoBehaviour {
 
     // UI
     [SerializeField] private PauseUI pauseUI;
+    [SerializeField] private InfoUI infoUI;
+    [SerializeField] private ItemUI itemUI;
 
     // Author(s): Thomas Wang
     // Start is called before the first frame update
@@ -85,6 +87,7 @@ public class CombatManager : MonoBehaviour {
         }
         if (!multiplayer) {
             currItem = currItems[itemIndex];
+            itemUI.SetPotionUI(currItem);
             for (int i = 0; i < currItems.Count; i++)
             {
                 if (currItems[i] != currItem) {
@@ -107,12 +110,16 @@ public class CombatManager : MonoBehaviour {
                         NextPet();
                     } else if (Input.GetKeyDown(prevItemKey)) {
                         PreviousItem();
+                        itemUI.SetPotionUI(currItem);
                     } else if (Input.GetKeyDown(nextItemKey)) {
                         NextItem();
+                        itemUI.SetPotionUI(currItem);
                     } else if (Input.GetKeyDown(useItemKey) && currItem != null) {
                         //pass the item the combat manager so the item's actions can be carried out
                         currItem.UseItem(this);
+                        infoUI.newPotionText(currPet, currItem);
                         RemoveItem();
+                        itemUI.SetPotionUI(currItem);
                         // since a player can use an item and attack, we don't call humanAttack() afterwards
                         //humanAttack();
                     } else if (Input.GetKeyDown(p1AttackKey)) {
@@ -268,7 +275,8 @@ public class CombatManager : MonoBehaviour {
     private IEnumerator PetAttack() {
         //Debug.Log(currPet.type + " is attacking " + currHuman.type);
         isAttacking = true;
-        currPet.AttackEnemy(currHuman);
+        //currPet.AttackEnemy(currHuman);
+        infoUI.newAttackText(currPet, currHuman, currPet.AttackEnemy(currHuman));
         if (currHuman.getIsDead()) {
             RemoveHuman();
         }
@@ -276,13 +284,16 @@ public class CombatManager : MonoBehaviour {
             petWin = true;
             pauseUI.Win();
         }
-        yield return new WaitForSeconds(playerDelay);
-        if (!multiplayer) {
-            turnText.text = "Enemy's Turn";
-        } else {
-            turnText.text = "Player 2's Turn";
+        if (!skipTurn) {
+            if (!multiplayer) {
+                turnText.text = "Enemy's Turn";
+            } else {
+                turnText.text = "Player 2's Turn";
+            }
+            turnText.alignment = TextAnchor.MiddleRight;
         }
-        turnText.alignment = TextAnchor.MiddleRight;
+        yield return new WaitForSeconds(playerDelay);
+        
         isAttacking = false;
     }
 
@@ -295,7 +306,8 @@ public class CombatManager : MonoBehaviour {
             yield return new WaitForSeconds(aiDelay);
         }
         if (skipTurn == false) {
-            currHuman.AttackEnemy(currPet);
+            //currHuman.AttackEnemy(currPet);
+            infoUI.newAttackText(currHuman, currPet, currHuman.AttackEnemy(currPet));
             if (currPet.getIsDead()) {
                 RemovePet();
             }
@@ -303,13 +315,13 @@ public class CombatManager : MonoBehaviour {
                 humanWin = true;
                 pauseUI.Win();
             }
+            turnText.text = "Player 1's Turn";
+            turnText.alignment = TextAnchor.MiddleLeft;
         } else {
             skipTurn = false;
         }
         yield return new WaitForSeconds(playerDelay);
 
-        turnText.text = "Player 1's Turn";
-        turnText.alignment = TextAnchor.MiddleLeft;
         isAttacking = false;
     }
 
@@ -345,6 +357,7 @@ public class CombatManager : MonoBehaviour {
     // Author(s): Thomas Wang
     // used to remove a pet from the list when the pet dies, allowing the right pet to be selected afterwards
     private void RemovePet() {
+        infoUI.newFaintText(currPet);
         // only one pet remaining
         if (currPets.Count == 1) {
             currPet.gameObject.SetActive(false);
@@ -366,6 +379,7 @@ public class CombatManager : MonoBehaviour {
     // Author(s): Thomas Wang
     // used to remove a human from the list when the human dies, allowing the right human to be selected afterwards
     private void RemoveHuman() {
+        infoUI.newFaintText(currHuman);
         // only one pet remaining
         if (currHumans.Count == 1) {
             currHuman.gameObject.SetActive(false);
@@ -387,6 +401,7 @@ public class CombatManager : MonoBehaviour {
     // Author(s): Thomas Wang
     private void RemoveItem()
     {
+
         // only one item remaining
         if (currItems.Count == 1)
         {
