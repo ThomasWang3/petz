@@ -284,6 +284,7 @@ public class CombatManager : MonoBehaviour {
             petWin = true;
             pauseUI.Win();
         }
+        yield return new WaitForSeconds(playerDelay);
         if (!skipTurn) {
             if (!multiplayer) {
                 turnText.text = "Enemy's Turn";
@@ -292,7 +293,6 @@ public class CombatManager : MonoBehaviour {
             }
             turnText.alignment = TextAnchor.MiddleRight;
         }
-        yield return new WaitForSeconds(playerDelay);
         
         isAttacking = false;
     }
@@ -315,12 +315,12 @@ public class CombatManager : MonoBehaviour {
                 humanWin = true;
                 pauseUI.Win();
             }
+            yield return new WaitForSeconds(playerDelay);
             turnText.text = "Player 1's Turn";
             turnText.alignment = TextAnchor.MiddleLeft;
         } else {
             skipTurn = false;
         }
-        yield return new WaitForSeconds(playerDelay);
 
         isAttacking = false;
     }

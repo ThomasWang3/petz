@@ -5227,7 +5227,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart Game
+  m_Text: Restart Level
 --- !u!222 &2038487786
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5408,7 +5408,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cm: {fileID: 1946475509}
-  mcm: {fileID: 0}
   victoryText: {fileID: 2091986575}
 --- !u!1001 &243360050852870558
 PrefabInstance:

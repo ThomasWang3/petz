@@ -10,7 +10,7 @@ public class HumanUI : BattleUI
         character = cm.getCurrHuman();
     }
 
-    protected override void updateChar() {
+    override protected void updateChar() {
         character = cm.getCurrHuman();
     }
 }

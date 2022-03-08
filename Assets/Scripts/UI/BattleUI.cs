@@ -24,6 +24,8 @@ public class BattleUI : MonoBehaviour
 
     protected virtual void updateChar() { }
 
+
+
     public void SetHealthUI() {
         charName.text = character.getName();
         charType.text = character.getCharType();
@@ -34,7 +36,7 @@ public class BattleUI : MonoBehaviour
         slider.value = currHealth;
 
 
-        hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
+        hp.text = currHealth.ToString() + " / " + maxHealth.ToString() + " hp";
         fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
         
     }
@@ -55,7 +57,7 @@ public class BattleUI : MonoBehaviour
             // used to check if the last pet is null, and then appropriately change the HP text to 0/maxHealth;
             currHealth = 0;
             slider.value = currHealth;
-            hp.text = currHealth.ToString() + " / " + maxHealth.ToString();
+            hp.text = currHealth.ToString() + " / " + maxHealth.ToString() + " hp";
             fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currHealth / maxHealth);
         }
     }
