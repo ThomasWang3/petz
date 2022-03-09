@@ -63,7 +63,6 @@ public class CombatManager : MonoBehaviour {
     [SerializeField] private int safeHumans;
     [SerializeField] private bool skipTurn = false;
     private int player1Switches = 0;
-    private int aiSwitches = 0;
     private int humanSwitches = 0;
     //I will use this to implement the switch limit and reset it in certain areas
 
@@ -132,6 +131,7 @@ public class CombatManager : MonoBehaviour {
                         p1Turn = false;
                     }
                 } else {
+                    humanSwitchStrategy();
                     HumanSafety();
                     StartCoroutine(HumanAttack());
                     p1Turn = true;
@@ -317,6 +317,7 @@ public class CombatManager : MonoBehaviour {
         if (skipTurn == false) {
             //currHuman.AttackEnemy(currPet);
             infoUI.newAttackText(currHuman, currPet, currHuman.AttackEnemy(currPet));
+            humanSwitches = 0;
             if (currPet.getIsDead()) {
                 RemovePet();
             }
@@ -334,36 +335,54 @@ public class CombatManager : MonoBehaviour {
         isAttacking = false;
     }
 
+    private void AISwitch()
+    {
+        if (humanIndex == (currHumans.Count-1))
+        {
+            currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
+            humanIndex = 0;
+            currHuman = currHumans[humanIndex];
+            currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+        }
+        else
+        {
+            currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
+            humanIndex += 1;
+            currHuman = currHumans[humanIndex];
+            currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+        }
+    }
+
     // Author(s): Daniel J. Garcia
     //Ensures that the current human isn't in the danger state, and if all humans are in danger, no effect is taken.
     private void HumanSafety()
     {
         if (safeHumans > 0 && (currHuman.isInCaution() == true))
         {
-            if (currHuman.isInDanger() == true || currHuman.getIsMatchedWell() == false)
+            //checks for caution/danger state. If ai is in caution but the matchup is ideal, they remain. Otherwise, they switch characters
+            if (currHuman.isInDanger() == true || currHuman.getMatchState() !=2)
             {
                 safeHumans -= 1;
                 while (currHuman.isInCaution() && safeHumans > 0)
                 {
 
                     //switches the human character
-                    if (humanIndex == currHumans.Count)
-                    {
-                        currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
-                        humanIndex = 0;
-                        currHuman = currHumans[humanIndex];
-                        currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
-                    }
-                    else
-                    {
-                        currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
-                        humanIndex += 1;
-                        currHuman = currHumans[humanIndex];
-                        currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
-                    }
+                    AISwitch();
                 }
             }
 
+        }
+    }
+
+    private void humanSwitchStrategy()
+    {
+        if (currHuman.getMatchState() != 2)
+        {
+            AISwitch();
+        }
+        if (currHuman.getMatchState() == 1)
+        {
+            AISwitch();
         }
     }
 
