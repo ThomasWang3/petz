@@ -4027,7 +4027,10 @@ MonoBehaviour:
   levels:
   - MainMenu
   - OverworldScene
-  - 1pScene
+  - PunkKidFight
+  - GrandmaFight
+  - VeteranFight
+  - RichManFight
   - 2pScene
   currentLevelIndex: 1
 --- !u!114 &1696710344

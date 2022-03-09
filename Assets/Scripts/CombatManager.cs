@@ -77,7 +77,8 @@ public class CombatManager : MonoBehaviour {
     void Start() {
         //need to fill pets array and humans array with all pets and humans in current fight
         currPet = currPets[petIndex];
-        keyUI.UpdateSwitchKeysPosition(currPet);
+        keyUI.UpdateP1KeysPosition(currPet);
+        //keyUI.UpdateSwitchKeysPosition(currPet);
         safeHumans = currHumans.Count;
         for (int i = 0; i < currPets.Count; i++) {
             if (currPets[i] != currPet) {
@@ -99,6 +100,9 @@ public class CombatManager : MonoBehaviour {
                     currItems[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
                 }
             }
+        } else {
+            keyUI.UpdateP2KeysPosition(currHuman);
+            keyUI.TurnOffP2Keys();
         }
     }
 
@@ -111,10 +115,10 @@ public class CombatManager : MonoBehaviour {
                 if (p1Turn) {
                     if (Input.GetKeyDown(p1PrevKey)) {
                         PreviousPet();
-                        keyUI.UpdateSwitchKeysPosition(currPet);
+                        keyUI.UpdateP1KeysPosition(currPet);
                     } else if (Input.GetKeyDown(p1NextKey)) {
                         NextPet();
-                        keyUI.UpdateSwitchKeysPosition(currPet);
+                        keyUI.UpdateP1KeysPosition(currPet);
                     } else if (Input.GetKeyDown(prevItemKey) && currItem != null) {
                         PreviousItem();
                         itemUI.SetPotionUI(currItem);
@@ -151,9 +155,11 @@ public class CombatManager : MonoBehaviour {
                 if (p1Turn) {
                     if (Input.GetKeyDown(p1PrevKey)) {
                         PreviousPet();
+                        keyUI.UpdateP1KeysPosition(currPet);
                     } else
                     if (Input.GetKeyDown(p1NextKey)) {
                         NextPet();
+                        keyUI.UpdateP1KeysPosition(currPet);
                     } else
                     if (Input.GetKeyDown(p1AttackKey)) {
                         StartCoroutine(PetAttack());
@@ -163,9 +169,11 @@ public class CombatManager : MonoBehaviour {
                     // Player 2's turn
                     if (Input.GetKeyDown(p2PrevKey)) {
                         PreviousHuman();
+                        keyUI.UpdateP2KeysPosition(currHuman);
                     } else
                     if (Input.GetKeyDown(p2NextKey)) {
                         NextHuman();
+                        keyUI.UpdateP2KeysPosition(currHuman);
                     } else
                     if (Input.GetKeyDown(p2AttackKey)) {
                         StartCoroutine(HumanAttack());
@@ -223,9 +231,9 @@ public class CombatManager : MonoBehaviour {
             currPet = currPets[petIndex];
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
             if (player1Switches == 2) {
-                keyUI.TurnOffSwitchKeys();
+                keyUI.TurnOffP1Keys();
             } else {
-                keyUI.TurnOnSwitchKeys();
+                keyUI.TurnOnP1Keys();
             }
         }
     }
@@ -241,9 +249,9 @@ public class CombatManager : MonoBehaviour {
             currPet = currPets[petIndex];
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
             if (player1Switches == 2) {
-                keyUI.TurnOffSwitchKeys();
+                keyUI.TurnOffP1Keys();
             } else {
-                keyUI.TurnOnSwitchKeys();
+                keyUI.TurnOnP1Keys();
             }
         }
     }
@@ -258,6 +266,11 @@ public class CombatManager : MonoBehaviour {
             humanSwitches++;
             currHuman = currHumans[humanIndex];
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+            if (humanSwitches == 2) {
+                keyUI.TurnOffP2Keys();
+            } else {
+                keyUI.TurnOnP2Keys();
+            }
         }
     }
     
@@ -270,6 +283,11 @@ public class CombatManager : MonoBehaviour {
             humanSwitches++;
             currHuman = currHumans[humanIndex];
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+            if (humanSwitches == 2) {
+                keyUI.TurnOffP2Keys();
+            } else {
+                keyUI.TurnOnP2Keys();
+            }
         }
         // goes to next Human if p2PrevKey ("down") is pressed
     }
@@ -299,7 +317,7 @@ public class CombatManager : MonoBehaviour {
     // Author: Thomas Wang, Ashley Sun
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
     private IEnumerator PetAttack() {
-        keyUI.TurnOffSwitchKeys();
+        keyUI.TurnOffP1Keys();
         //Debug.Log(currPet.type + " is attacking " + currHuman.type);
         isAttacking = true;
         //currPet.AttackEnemy(currHuman);
@@ -322,11 +340,13 @@ public class CombatManager : MonoBehaviour {
             turnText.alignment = TextAnchor.MiddleRight;
         }
         isAttacking = false;
+        keyUI.TurnOnP2Keys();
     }
 
     // Author: Thomas Wang, Ashley Sun
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
     private IEnumerator HumanAttack() {
+        keyUI.TurnOffP2Keys();
         isAttacking = true;
         //Debug.Log(currHuman.type + " is attacking " + currPet.type);
         if (!multiplayer) {
@@ -351,7 +371,7 @@ public class CombatManager : MonoBehaviour {
         }
 
         isAttacking = false;
-        keyUI.TurnOnSwitchKeys();
+        keyUI.TurnOnP1Keys();
     }
 
     private void AISwitch()

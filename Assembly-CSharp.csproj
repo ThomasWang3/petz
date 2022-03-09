@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Characters\OverworldMovement.cs" />
     <Compile Include="Assets\Scripts\UI\BattleUI.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\UI\KeyUI.cs" />
     <Compile Include="Assets\Scripts\Characters\Humans\PunkKid.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Pet.cs" />
     <Compile Include="Assets\Scripts\Items\WeaknessHealthItem.cs" />
@@ -89,7 +90,6 @@
     <Compile Include="Assets\Scripts\UI\HumanUI.cs" />
     <Compile Include="Assets\Scripts\UI\InfoUI.cs" />
     <Compile Include="Assets\Scripts\Items\StrengthItem.cs" />
-    <Compile Include="Assets\KeyUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
