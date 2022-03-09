@@ -9,6 +9,7 @@ public class VictoryUI : MonoBehaviour
 {
     [SerializeField] private CombatManager cm;
     [SerializeField] private Text victoryText;
+    [SerializeField] private LevelManager lm;
     // Start is called before the first frame update
     
     // Update is called once per frame

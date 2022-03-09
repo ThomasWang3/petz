@@ -249,7 +249,7 @@ public class CombatManager : MonoBehaviour {
     }
 
     // Author(s): Ashley Sun, Daniel J. Garcia
-    // goes to previous uman if p2PrevKey ("up") is pressed
+    // goes to previous Human if p2PrevKey ("up") is pressed
     void PreviousHuman() {
         //Debug.Log("previous function");
         if (humanIndex > 0 && humanSwitches < 2) {
@@ -299,6 +299,7 @@ public class CombatManager : MonoBehaviour {
     // Author: Thomas Wang, Ashley Sun
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
     private IEnumerator PetAttack() {
+        keyUI.TurnOffSwitchKeys();
         //Debug.Log(currPet.type + " is attacking " + currHuman.type);
         isAttacking = true;
         //currPet.AttackEnemy(currHuman);
@@ -320,7 +321,6 @@ public class CombatManager : MonoBehaviour {
             }
             turnText.alignment = TextAnchor.MiddleRight;
         }
-        
         isAttacking = false;
     }
 
@@ -351,6 +351,7 @@ public class CombatManager : MonoBehaviour {
         }
 
         isAttacking = false;
+        keyUI.TurnOnSwitchKeys();
     }
 
     private void AISwitch()
