@@ -13,6 +13,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected List<string> strengths;
     [SerializeField] protected List<string> weaknesses;
     [SerializeField] protected bool isDead = false;
+    [SerializeField] protected bool isMatchedWell = false;
 
     //protected Character() { }
 
@@ -53,12 +54,20 @@ public abstract class Character : MonoBehaviour
         return isDead;
     }
 
+    public bool getIsMatchedWell()
+    {
+        return isMatchedWell;
+    }
+
     public int AttackEnemy(Character enemy) {
         if (strengths.Contains(enemy.getCharType()) || enemy.weaknesses.Contains(type)) {
+            isMatchedWell = true;
             return enemy.TakeDamage(2 * attack);
         } else if (weaknesses.Contains(enemy.getCharType()) || enemy.strengths.Contains(type)) {
+            isMatchedWell = false;
             return enemy.TakeDamage(attack / 2);
         } else {
+            isMatchedWell = false;
             return enemy.TakeDamage(attack);
         }
     }

@@ -62,6 +62,10 @@ public class CombatManager : MonoBehaviour {
     //[SerializeField] private bool humanDanger = false;
     [SerializeField] private int safeHumans;
     [SerializeField] private bool skipTurn = false;
+    private int player1Switches = 0;
+    private int aiSwitches = 0;
+    private int humanSwitches = 0;
+    //I will use this to implement the switch limit and reset it in certain areas
 
     // UI
     [SerializeField] private PauseUI pauseUI;
@@ -200,48 +204,52 @@ public class CombatManager : MonoBehaviour {
         skipTurn = true;
     }
 
-    // Author(s): Thomas Wang
+    // Author(s): Thomas Wang, Daniel J. Garcia
     // goes to previous Pet if p1PrevKey ("w") is pressed
     void PreviousPet() {
         //Debug.Log("previous function");
-        if (petIndex > 0) {
+        if (petIndex > 0 && player1Switches < 2) {
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             petIndex--;
+            player1Switches++;
             currPet = currPets[petIndex];
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
     }
     
-    // Author(s): Thomas Wang
+    // Author(s): Thomas Wang, Daniel J. Garcia
     // goes to next Pet if p1NextKey ("s") is pressed
     void NextPet() {
         //Debug.Log("next function");
-        if (petIndex < (currPets.Count - 1)) {
+        if (petIndex < (currPets.Count - 1) && player1Switches < 2) {
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             petIndex++;
+            player1Switches++;
             currPet = currPets[petIndex];
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
     }
 
-    // Author(s): Ashley Sun
+    // Author(s): Ashley Sun, Daniel J. Garcia
     // goes to previous uman if p2PrevKey ("up") is pressed
     void PreviousHuman() {
         //Debug.Log("previous function");
-        if (humanIndex > 0) {
+        if (humanIndex > 0 && humanSwitches < 2) {
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             humanIndex--;
+            humanSwitches++;
             currHuman = currHumans[humanIndex];
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
     }
     
-    // Author(s): Ashley Sun
+    // Author(s): Ashley Sun, Daniel J. Garcia
     void NextHuman() {
         //Debug.Log("next function");
-        if (humanIndex < (currHumans.Count - 1)) {
+        if (humanIndex < (currHumans.Count - 1) && humanSwitches < 2) {
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             humanIndex++;
+            humanSwitches++;
             currHuman = currHumans[humanIndex];
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
@@ -277,6 +285,7 @@ public class CombatManager : MonoBehaviour {
         isAttacking = true;
         //currPet.AttackEnemy(currHuman);
         infoUI.newAttackText(currPet, currHuman, currPet.AttackEnemy(currHuman));
+        player1Switches = 0;
         if (currHuman.getIsDead()) {
             RemoveHuman();
         }
@@ -329,27 +338,32 @@ public class CombatManager : MonoBehaviour {
     //Ensures that the current human isn't in the danger state, and if all humans are in danger, no effect is taken.
     private void HumanSafety()
     {
-        if (safeHumans > 0 && (currHuman.isInDanger() == true))
+        if (safeHumans > 0 && (currHuman.isInCaution() == true))
         {
-            safeHumans -= 1;
-
-            while (currHuman.isInDanger() && safeHumans > 0)
+            if (currHuman.isInDanger() == true || currHuman.getIsMatchedWell() == false)
             {
-                if (humanIndex == currHumans.Count)
+                safeHumans -= 1;
+                while (currHuman.isInCaution() && safeHumans > 0)
                 {
-                    currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
-                    humanIndex = 0;
-                    currHuman = currHumans[humanIndex];
-                    currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
-                }
-                else
-                {
-                    currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
-                    humanIndex += 1;
-                    currHuman = currHumans[humanIndex];
-                    currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+
+                    //switches the human character
+                    if (humanIndex == currHumans.Count)
+                    {
+                        currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
+                        humanIndex = 0;
+                        currHuman = currHumans[humanIndex];
+                        currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+                    }
+                    else
+                    {
+                        currHumans[humanIndex].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
+                        humanIndex += 1;
+                        currHuman = currHumans[humanIndex];
+                        currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+                    }
                 }
             }
+
         }
     }
 
