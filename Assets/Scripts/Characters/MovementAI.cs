@@ -2,33 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Author(s): Mike Xu
-public class MovementAI : MonoBehaviour {
+// Author(s): Mike Xu, Logan Mikulski
+public class MovementAI : MonoBehaviour 
+{
+    [SerializeField] protected Transform player;
+    [SerializeField] protected Rigidbody2D playerRB;
+    [SerializeField] protected float moveSpeed = 3f;
+    [SerializeField] protected float distance;
+    [SerializeField] protected float detectionRange = 5f;
+    [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] protected Vector2 movement;
+    [SerializeField] protected float randDiff = 5f;
+    [SerializeField] protected double cooldownTime = 0;
+    [SerializeField] protected double cooldownAdd = 1;
+    protected string state;
+    protected string rest = "rest";
+    protected string chase = "chase";
+    protected string run = "run";
+    protected string wander = "wander";
 
-    [SerializeField] private Transform player;
-    [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float distance = 3f;
-    [SerializeField] private float detectionRange = 5f;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Vector2 movement;
-    // Start is called before the first frame update
-    void Start() {
-        rb = this.GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update() {
-        distance = Vector3.Distance(player.transform.position, this.transform.position);
+    protected Vector2 GetPlayerDirection()
+    {
         Vector3 direction = player.position - transform.position;
         direction.Normalize();
-        movement = direction;
+        return direction;
     }
-    private void FixedUpdate() {
-        moveCharacter(movement);
+
+    protected void AIMoveTowards(Vector2 direction) 
+    {
+        rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
     }
-    void moveCharacter(Vector2 direction) {
-        if (distance < detectionRange) {
-            rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
-        }
+
+    protected void AIMoveAway(Vector2 direction)
+    {
+        rb.MovePosition((Vector2)transform.position - (direction * moveSpeed * Time.deltaTime));
+    }
+
+    //provides a random direction based on the provided direction
+    protected Vector2 GetRandDirection(Vector2 direction)
+    {
+        Vector2 randDirection;
+        randDirection.x = Random.Range(direction.x - randDiff, direction.x + randDiff);
+        randDirection.y = Random.Range(direction.y - randDiff, direction.y + randDiff);
+        return randDirection;
     }
 }
