@@ -13,7 +13,7 @@ public class SpeedItem : Item {
     // Start is called before the first frame update
     void Start()
     {
-        itemName = "Speed Pill";
+        itemName = "Speed Potion";
     }
 
     public override void UseItem(CombatManager combatManager)

@@ -16,7 +16,7 @@ public class StrengthItem : Item
     // Start is called before the first frame update
     void Start()
     {
-        itemName = "Strength Pill";
+        itemName = "Strength Potion";
     }
 
     public override void UseItem(CombatManager combatManager)
