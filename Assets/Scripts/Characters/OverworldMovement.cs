@@ -10,6 +10,7 @@ public class OverworldMovement : MonoBehaviour
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected Rigidbody2D playerRB;
     [SerializeField] protected BoxCollider2D playerBC;
+    [SerializeField] private EnemyManager em;
     private Vector2 movementDirection;
     [SerializeField] protected LevelManager lm;
 
@@ -43,8 +44,10 @@ public class OverworldMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.layer == 6) {
-            lm.NextLevel();
+        if (collision.gameObject.layer >= 6) {
+            collision.gameObject.SetActive(false);
+            em.ReduceEnemyCount();
+            lm.LoadLevelWithIndex(collision.gameObject.layer - 4);
         }
     }
 }

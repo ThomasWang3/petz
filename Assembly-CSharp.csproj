@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\UI\HumanUI.cs" />
     <Compile Include="Assets\Scripts\UI\InfoUI.cs" />
     <Compile Include="Assets\Scripts\Items\StrengthItem.cs" />
+    <Compile Include="Assets\Scripts\EnemyManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

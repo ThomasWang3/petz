@@ -67,6 +67,7 @@ public class CombatManager : MonoBehaviour {
     //I will use this to implement the switch limit and reset it in certain areas
 
     // UI
+    [SerializeField] private VictoryUI victoryUI;
     [SerializeField] private PauseUI pauseUI;
     [SerializeField] private InfoUI infoUI;
     [SerializeField] private ItemUI itemUI;
@@ -143,9 +144,11 @@ public class CombatManager : MonoBehaviour {
                         p1Turn = false;
                     }
                 } else {
-                    humanSwitchStrategy();
-                    HumanSafety();
-                    StartCoroutine(HumanAttack());
+                    if(!petWin && !humanWin) {
+                        humanSwitchStrategy();
+                        HumanSafety();
+                        StartCoroutine(HumanAttack());
+                    }
                     p1Turn = true;
 
                 }
@@ -266,10 +269,12 @@ public class CombatManager : MonoBehaviour {
             humanSwitches++;
             currHuman = currHumans[humanIndex];
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
-            if (humanSwitches == 2) {
-                keyUI.TurnOffP2Keys();
-            } else {
-                keyUI.TurnOnP2Keys();
+            if (!multiplayer) {
+                if (humanSwitches == 2) {
+                    keyUI.TurnOffP2Keys();
+                } else {
+                    keyUI.TurnOnP2Keys();
+                }
             }
         }
     }
@@ -283,10 +288,12 @@ public class CombatManager : MonoBehaviour {
             humanSwitches++;
             currHuman = currHumans[humanIndex];
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
-            if (humanSwitches == 2) {
-                keyUI.TurnOffP2Keys();
-            } else {
-                keyUI.TurnOnP2Keys();
+            if (!multiplayer) {
+                if (humanSwitches == 2) {
+                    keyUI.TurnOffP2Keys();
+                } else {
+                    keyUI.TurnOnP2Keys();
+                }
             }
         }
         // goes to next Human if p2PrevKey ("down") is pressed
@@ -328,7 +335,8 @@ public class CombatManager : MonoBehaviour {
         }
         if (currHumans.Count == 0) {
             petWin = true;
-            pauseUI.Win();
+            //pauseUI.Win();
+            victoryUI.Victory();
         }
         yield return new WaitForSeconds(playerDelay);
         if (!skipTurn) {
@@ -340,13 +348,17 @@ public class CombatManager : MonoBehaviour {
             turnText.alignment = TextAnchor.MiddleRight;
         }
         isAttacking = false;
-        keyUI.TurnOnP2Keys();
+        if (multiplayer) {
+            keyUI.TurnOnP2Keys();
+        }
     }
 
     // Author: Thomas Wang, Ashley Sun
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
     private IEnumerator HumanAttack() {
-        keyUI.TurnOffP2Keys();
+        if (multiplayer) {
+            keyUI.TurnOffP2Keys();
+        }
         isAttacking = true;
         //Debug.Log(currHuman.type + " is attacking " + currPet.type);
         if (!multiplayer) {
@@ -361,7 +373,8 @@ public class CombatManager : MonoBehaviour {
             }
             if (currPets.Count == 0) {
                 humanWin = true;
-                pauseUI.Win();
+                //pauseUI.Win();
+                victoryUI.Victory();
             }
             yield return new WaitForSeconds(playerDelay);
             turnText.text = "Player 1's Turn";

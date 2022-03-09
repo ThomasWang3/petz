@@ -13,9 +13,7 @@ public class KeyUI : MonoBehaviour {
 
     public void UpdateP1KeysPosition(Character character) {
         wKey.transform.position = camera.WorldToScreenPoint(character.transform.position) + new Vector3(switchKeyOffset.x, +switchKeyOffset.y, switchKeyOffset.z);
-        Debug.Log(wKey.transform.position);
         sKey.transform.position = camera.WorldToScreenPoint(character.transform.position) + new Vector3(switchKeyOffset.x, -switchKeyOffset.y, switchKeyOffset.z);
-        Debug.Log(sKey.transform.position);
     }
 
 

@@ -1351,6 +1351,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wKey: {fileID: 122985535}
   sKey: {fileID: 1318525580}
+  upKey: {fileID: 0}
+  downKey: {fileID: 0}
   switchKeyOffset: {x: 100, y: 40, z: 0}
   camera: {fileID: 288484238}
 --- !u!1 &288484236
@@ -4640,7 +4642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cm: {fileID: 1819983047}
   victoryText: {fileID: 1748999358}
-  lm: {fileID: 0}
+  lm: {fileID: 1470884710}
 --- !u!114 &1748999358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4982,6 +4984,7 @@ MonoBehaviour:
   playerDelay: 1
   safeHumans: 0
   skipTurn: 0
+  victoryUI: {fileID: 1748999357}
   pauseUI: {fileID: 983991884}
   infoUI: {fileID: 12648507}
   itemUI: {fileID: 369607853}
