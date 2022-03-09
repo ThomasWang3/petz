@@ -14,4 +14,8 @@ public class ItemUI : MonoBehaviour
         potionDesc.text = potion.getShortDescription();
     }
 
+    public void EmptyPotionUI() {
+        potionName.text = "N/A";
+        potionDesc.text = "N/A";
+    }
 }

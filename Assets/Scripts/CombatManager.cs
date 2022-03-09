@@ -70,12 +70,14 @@ public class CombatManager : MonoBehaviour {
     [SerializeField] private PauseUI pauseUI;
     [SerializeField] private InfoUI infoUI;
     [SerializeField] private ItemUI itemUI;
+    [SerializeField] private KeyUI keyUI;
 
     // Author(s): Thomas Wang
     // Start is called before the first frame update
     void Start() {
         //need to fill pets array and humans array with all pets and humans in current fight
         currPet = currPets[petIndex];
+        keyUI.UpdateSwitchKeysPosition(currPet);
         safeHumans = currHumans.Count;
         for (int i = 0; i < currPets.Count; i++) {
             if (currPets[i] != currPet) {
@@ -109,12 +111,14 @@ public class CombatManager : MonoBehaviour {
                 if (p1Turn) {
                     if (Input.GetKeyDown(p1PrevKey)) {
                         PreviousPet();
+                        keyUI.UpdateSwitchKeysPosition(currPet);
                     } else if (Input.GetKeyDown(p1NextKey)) {
                         NextPet();
-                    } else if (Input.GetKeyDown(prevItemKey)) {
+                        keyUI.UpdateSwitchKeysPosition(currPet);
+                    } else if (Input.GetKeyDown(prevItemKey) && currItem != null) {
                         PreviousItem();
                         itemUI.SetPotionUI(currItem);
-                    } else if (Input.GetKeyDown(nextItemKey)) {
+                    } else if (Input.GetKeyDown(nextItemKey) && currItem != null) {
                         NextItem();
                         itemUI.SetPotionUI(currItem);
                     } else if (Input.GetKeyDown(useItemKey) && currItem != null) {
@@ -122,7 +126,11 @@ public class CombatManager : MonoBehaviour {
                         currItem.UseItem(this);
                         infoUI.newPotionText(currPet, currItem);
                         RemoveItem();
-                        itemUI.SetPotionUI(currItem);
+                        if(currItem != null) {
+                            itemUI.SetPotionUI(currItem);
+                        } else {
+                            itemUI.EmptyPotionUI();
+                        }
                         // since a player can use an item and attack, we don't call humanAttack() afterwards
                         //humanAttack();
                     } else if (Input.GetKeyDown(p1AttackKey)) {
@@ -214,6 +222,11 @@ public class CombatManager : MonoBehaviour {
             player1Switches++;
             currPet = currPets[petIndex];
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+            if (player1Switches == 2) {
+                keyUI.TurnOffSwitchKeys();
+            } else {
+                keyUI.TurnOnSwitchKeys();
+            }
         }
     }
     
@@ -227,6 +240,11 @@ public class CombatManager : MonoBehaviour {
             player1Switches++;
             currPet = currPets[petIndex];
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
+            if (player1Switches == 2) {
+                keyUI.TurnOffSwitchKeys();
+            } else {
+                keyUI.TurnOnSwitchKeys();
+            }
         }
     }
 
