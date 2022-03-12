@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Author: Thomas Wang
 public class InfoUI : MonoBehaviour
 {
     //[SerializeField] private CombatManager cm;

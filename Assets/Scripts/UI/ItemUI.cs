@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Author: Thomas WAng
+// Author: Thomas Wang
 public class ItemUI : MonoBehaviour
 {
     [SerializeField] protected Text potionName;

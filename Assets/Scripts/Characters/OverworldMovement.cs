@@ -45,8 +45,8 @@ public class OverworldMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.layer >= 6) {
-            collision.gameObject.SetActive(false);
-            em.ReduceEnemyCount();
+            Debug.Log("Enemy Collision");
+            em.ReduceEnemyCount(collision.gameObject.layer - 6);
             lm.LoadLevelWithIndex(collision.gameObject.layer - 4);
         }
     }

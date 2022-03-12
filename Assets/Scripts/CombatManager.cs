@@ -24,26 +24,6 @@ public class CombatManager : MonoBehaviour {
     [SerializeField] private List<Item> currItems;
     [SerializeField] private int itemIndex;
 
-    // Controls
-    // P1 Pet Controls (w - previous, s - next)
-    [SerializeField] private KeyCode p1PrevKey;
-    [SerializeField] private KeyCode p1NextKey;
-
-    // P1 Item Controls (a - previous,  - next, e - use item)
-    [SerializeField] private KeyCode prevItemKey;
-    [SerializeField] private KeyCode nextItemKey;
-    [SerializeField] private KeyCode useItemKey;
-
-    // P1 Attack Controls (space - attack)
-    [SerializeField] private KeyCode p1AttackKey;
-
-    // P2 Human Controls (up - previous, down - next)
-    [SerializeField] private KeyCode p2PrevKey;
-    [SerializeField] private KeyCode p2NextKey;
-
-    // P2 Attack Controls (rightshift - attack)
-    [SerializeField] private KeyCode p2AttackKey;
-
     // Turn Text
     [SerializeField] private Text turnText;
 
@@ -107,87 +87,6 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    // Author(s): Thomas Wang, Ashley Sun
-    // Update is called once per frame
-    void Update() {
-        if (!pauseUI.IsPaused() && !isAttacking) {
-            if (!multiplayer) {
-                // The scene is singleplayer
-                if (p1Turn) {
-                    if (Input.GetKeyDown(p1PrevKey)) {
-                        PreviousPet();
-                        keyUI.UpdateP1KeysPosition(currPet);
-                    } else if (Input.GetKeyDown(p1NextKey)) {
-                        NextPet();
-                        keyUI.UpdateP1KeysPosition(currPet);
-                    } else if (Input.GetKeyDown(prevItemKey) && currItem != null) {
-                        PreviousItem();
-                        itemUI.SetPotionUI(currItem);
-                    } else if (Input.GetKeyDown(nextItemKey) && currItem != null) {
-                        NextItem();
-                        itemUI.SetPotionUI(currItem);
-                    } else if (Input.GetKeyDown(useItemKey) && currItem != null) {
-                        //pass the item the combat manager so the item's actions can be carried out
-                        currItem.UseItem(this);
-                        infoUI.newPotionText(currPet, currItem);
-                        RemoveItem();
-                        if(currItem != null) {
-                            itemUI.SetPotionUI(currItem);
-                        } else {
-                            itemUI.EmptyPotionUI();
-                        }
-                        // since a player can use an item and attack, we don't call humanAttack() afterwards
-                        //humanAttack();
-                    } else if (Input.GetKeyDown(p1AttackKey)) {
-                        //Debug.Log("space button pressed");
-                        StartCoroutine(PetAttack());
-                        p1Turn = false;
-                    }
-                } else {
-                    if(!petWin && !humanWin) {
-                        humanSwitchStrategy();
-                        HumanSafety();
-                        StartCoroutine(HumanAttack());
-                    }
-                    p1Turn = true;
-
-                }
-            } else {
-                // The scene is multiplayer
-                // Player 1's turn
-                if (p1Turn) {
-                    if (Input.GetKeyDown(p1PrevKey)) {
-                        PreviousPet();
-                        keyUI.UpdateP1KeysPosition(currPet);
-                    } else
-                    if (Input.GetKeyDown(p1NextKey)) {
-                        NextPet();
-                        keyUI.UpdateP1KeysPosition(currPet);
-                    } else
-                    if (Input.GetKeyDown(p1AttackKey)) {
-                        StartCoroutine(PetAttack());
-                        p1Turn = false;
-                    }
-                } else {
-                    // Player 2's turn
-                    if (Input.GetKeyDown(p2PrevKey)) {
-                        PreviousHuman();
-                        keyUI.UpdateP2KeysPosition(currHuman);
-                    } else
-                    if (Input.GetKeyDown(p2NextKey)) {
-                        NextHuman();
-                        keyUI.UpdateP2KeysPosition(currHuman);
-                    } else
-                    if (Input.GetKeyDown(p2AttackKey)) {
-                        StartCoroutine(HumanAttack());
-                        p1Turn = true;
-                    }
-                }
-            }
-        }
-        
-    }
-
     public Pet getCurrPet()
     {
         return currPet;
@@ -223,9 +122,23 @@ public class CombatManager : MonoBehaviour {
         skipTurn = true;
     }
 
-    // Author(s): Thomas Wang, Daniel J. Garcia
+    public bool getIsPaused() {
+        return pauseUI.IsPaused();
+    }
+
+    public bool getisAttacking() {
+        return isAttacking;
+    }
+    
+    public bool getP1Turn() {
+        return p1Turn;
+    }
+
+
+
+    // Author(s): Thomas Wang
     // goes to previous Pet if p1PrevKey ("w") is pressed
-    void PreviousPet() {
+    public void PreviousPet() {
         //Debug.Log("previous function");
         if (petIndex > 0 && player1Switches < 2) {
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
@@ -239,11 +152,12 @@ public class CombatManager : MonoBehaviour {
                 keyUI.TurnOnP1Keys();
             }
         }
+        keyUI.UpdateP1KeysPosition(currPet);
     }
-    
-    // Author(s): Thomas Wang, Daniel J. Garcia
+
+    // Author(s): Thomas Wang
     // goes to next Pet if p1NextKey ("s") is pressed
-    void NextPet() {
+    public void NextPet() {
         //Debug.Log("next function");
         if (petIndex < (currPets.Count - 1) && player1Switches < 2) {
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
@@ -257,11 +171,12 @@ public class CombatManager : MonoBehaviour {
                 keyUI.TurnOnP1Keys();
             }
         }
+        keyUI.UpdateP1KeysPosition(currPet);
     }
 
     // Author(s): Ashley Sun, Daniel J. Garcia
     // goes to previous Human if p2PrevKey ("up") is pressed
-    void PreviousHuman() {
+    public void PreviousHuman() {
         //Debug.Log("previous function");
         if (humanIndex > 0 && humanSwitches < 2) {
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
@@ -277,10 +192,11 @@ public class CombatManager : MonoBehaviour {
                 }
             }
         }
+        keyUI.UpdateP2KeysPosition(currHuman);
     }
-    
+
     // Author(s): Ashley Sun, Daniel J. Garcia
-    void NextHuman() {
+    public void NextHuman() {
         //Debug.Log("next function");
         if (humanIndex < (currHumans.Count - 1) && humanSwitches < 2) {
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
@@ -297,33 +213,36 @@ public class CombatManager : MonoBehaviour {
             }
         }
         // goes to next Human if p2PrevKey ("down") is pressed
+       keyUI.UpdateP2KeysPosition(currHuman);
     }
 
     // Author(s): Logan Mikulski
     // goes to next Item if prevItemKey ("a") is pressed
-    void PreviousItem() {
+    public void PreviousItem() {
         if (itemIndex > 0) {
             currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             itemIndex--;
             currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
             currItem = currItems[itemIndex];
         }
+        itemUI.SetPotionUI(currItem);
     }
 
     // Author(s): Logan Mikulski
     // goes to next Item if nextItemKey ("d") is pressed
-    void NextItem() {
+    public void NextItem() {
         if (itemIndex < (currItems.Count - 1)) {
             currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             itemIndex++;
             currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
             currItem = currItems[itemIndex];
         }
+        itemUI.SetPotionUI(currItem);
     }
 
     // Author: Thomas Wang, Ashley Sun
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
-    private IEnumerator PetAttack() {
+    public IEnumerator PetAttack() {
         keyUI.TurnOffP1Keys();
         //Debug.Log(currPet.type + " is attacking " + currHuman.type);
         isAttacking = true;
@@ -351,14 +270,13 @@ public class CombatManager : MonoBehaviour {
         if (multiplayer) {
             keyUI.TurnOnP2Keys();
         }
+        p1Turn = false;
     }
 
     // Author: Thomas Wang, Ashley Sun
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
-    private IEnumerator HumanAttack() {
-        if (multiplayer) {
-            keyUI.TurnOffP2Keys();
-        }
+    public IEnumerator HumanAttack() {
+        keyUI.TurnOffP2Keys();
         isAttacking = true;
         //Debug.Log(currHuman.type + " is attacking " + currPet.type);
         if (!multiplayer) {
@@ -385,9 +303,49 @@ public class CombatManager : MonoBehaviour {
 
         isAttacking = false;
         keyUI.TurnOnP1Keys();
+        p1Turn = true;
     }
 
-    private void AISwitch()
+    public IEnumerator AIAttack() {
+        isAttacking = true;
+        //Debug.Log(currHuman.type + " is attacking " + currPet.type);
+        yield return new WaitForSeconds(aiDelay);
+        if (skipTurn == false) {
+            //currHuman.AttackEnemy(currPet);
+            infoUI.newAttackText(currHuman, currPet, currHuman.AttackEnemy(currPet));
+            humanSwitches = 0;
+            if (currPet.getIsDead()) {
+                RemovePet();
+            }
+            if (currPets.Count == 0) {
+                humanWin = true;
+                //pauseUI.Win();
+                victoryUI.Victory();
+            }
+            yield return new WaitForSeconds(aiDelay);
+            turnText.text = "Player 1's Turn";
+            turnText.alignment = TextAnchor.MiddleLeft;
+        } else {
+            skipTurn = false;
+        }
+
+        isAttacking = false;
+        keyUI.TurnOnP1Keys();
+        p1Turn = true;
+    }
+
+    public void UseItem() {
+        currItem.UseItem(this);
+        infoUI.newPotionText(currPet, currItem);
+        RemoveItem();
+        if (currItem != null) {
+            itemUI.SetPotionUI(currItem);
+        } else {
+            itemUI.EmptyPotionUI();
+        }
+    }
+
+    void AISwitch()
     {
         if (humanIndex == (currHumans.Count-1))
         {
@@ -407,7 +365,7 @@ public class CombatManager : MonoBehaviour {
 
     // Author(s): Daniel J. Garcia
     //Ensures that the current human isn't in the danger state, and if all humans are in danger, no effect is taken.
-    private void HumanSafety()
+    public void HumanSafety()
     {
         if (safeHumans > 0 && (currHuman.isInCaution() == true))
         {
@@ -417,7 +375,6 @@ public class CombatManager : MonoBehaviour {
                 safeHumans -= 1;
                 while (currHuman.isInCaution() && safeHumans > 0)
                 {
-
                     //switches the human character
                     AISwitch();
                 }
@@ -426,7 +383,7 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    private void humanSwitchStrategy()
+    public void humanSwitchStrategy()
     {
         if (currHuman.getMatchState() != 2)
         {
@@ -441,7 +398,7 @@ public class CombatManager : MonoBehaviour {
 
     // Author(s): Thomas Wang
     // used to remove a pet from the list when the pet dies, allowing the right pet to be selected afterwards
-    private void RemovePet() {
+    void RemovePet() {
         infoUI.newFaintText(currPet);
         // only one pet remaining
         if (currPets.Count == 1) {
@@ -463,7 +420,7 @@ public class CombatManager : MonoBehaviour {
 
     // Author(s): Thomas Wang
     // used to remove a human from the list when the human dies, allowing the right human to be selected afterwards
-    private void RemoveHuman() {
+    void RemoveHuman() {
         infoUI.newFaintText(currHuman);
         // only one pet remaining
         if (currHumans.Count == 1) {
@@ -484,7 +441,7 @@ public class CombatManager : MonoBehaviour {
     }
 
     // Author(s): Thomas Wang
-    private void RemoveItem()
+    void RemoveItem()
     {
 
         // only one item remaining
