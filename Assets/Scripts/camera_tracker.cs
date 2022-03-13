@@ -7,10 +7,10 @@ using UnityEngine;
 public class camera_tracker : MonoBehaviour
 {
 
-    public Vector2 trackingvect;
+    [SerializeField] private Vector2 trackingvect;
     private Vector3 offset;
-    public Transform player_location;
-    public float update_rate = 50;
+    [SerializeField] private Transform player_location;
+    [SerializeField] private float update_rate = 50;
     void Start()
     {
         offset = (Vector3)trackingvect;
