@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Author(s): 
+// Author(s): Logan Mikulski
 public class SpecialChaseAI : MovementAI
 {
     private float chaseSpeed = 2f;

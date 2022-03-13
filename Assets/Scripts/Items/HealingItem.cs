@@ -5,7 +5,7 @@ using UnityEngine;
 // Author(s): Logan Mikulski
 public class HealingItem : Item
 {
-    [SerializeField] private int hpIncrease;
+    [SerializeField] private int hpIncrease = 50;
     public override string getItemDescription() {
         return "Health increased by " + hpIncrease;
     }

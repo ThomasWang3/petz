@@ -3001,7 +3001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numHeld: 0
   itemName: 
-  hpIncrease: 5
+  hpIncrease: 50
 --- !u!1 &1221735291
 GameObject:
   m_ObjectHideFlags: 0
