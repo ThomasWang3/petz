@@ -5,12 +5,14 @@ using UnityEngine;
 // Author: Thomas Wang
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] enemies;
+    [SerializeField] public GameObject[] enemies;
     [SerializeField] private int enemiesLeft;
 
     // Start is called before the first frame update
     void Awake()
     {
+        // Debug.Log("enemiesLeft: " + enemiesLeft);
+        // Debug.Log("enemies: " + enemies[0]);
         if(enemiesLeft < 3) {
             Destroy(this.gameObject);
         }
@@ -24,6 +26,10 @@ public class EnemyManager : MonoBehaviour
     //        enemies[enemies.Length-1].SetActive(true);
     //    }
     //}
+
+    // public void PrintEnemy(int index) {
+    //     enemies[index]
+    // }
 
     public void ReduceEnemyCount(int index) {
         Debug.Log("Reduce Enemy Count");
