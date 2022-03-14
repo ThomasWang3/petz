@@ -18,7 +18,6 @@ public class BattleUI : MonoBehaviour
     protected Color fullHealthColor = Color.green;
     protected Color zeroHealthColor = Color.red;
 
-    //[SerializeField] protected MultiplayerCombatManager mcm;
     protected Character character;
 
     public virtual void updateChar(Character character) { }

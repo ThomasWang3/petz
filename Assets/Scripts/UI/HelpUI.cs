@@ -6,7 +6,6 @@ using UnityEngine.UI;
 // Author(s): Thomas Wang
 public class HelpUI : MonoBehaviour {
     [SerializeField] private GameObject helpUI;
-    //[SerializeField] private Button buttonObject;
     [SerializeField] private bool help = false;
     [SerializeField] private List<Text> texts;
     [SerializeField] private int textIndex;

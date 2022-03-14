@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Author: Thomas Wang
 public class EnemyManager : MonoBehaviour {
     [SerializeField] public List<GameObject> enemies;
     [SerializeField] private int enemiesLeft;

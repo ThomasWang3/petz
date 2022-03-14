@@ -40,9 +40,8 @@ public class CombatManager : MonoBehaviour {
     [SerializeField] private float playerDelay;
 
     // AI Checks
-    //I'll store the number of humans in the list. As each one enters the danger state, the number will decrease, and characters will switch.
-    //When it hits zero, humanDanger will be true. Once this occurs, gameplay will proceed as normal.
-    //[SerializeField] private bool humanDanger = false;
+    // I'll store the number of humans in the list. As each one enters the danger state, the number will decrease, and characters will switch.
+    // When it hits zero, humanDanger will be true. Once this occurs, gameplay will proceed as normal.
     [SerializeField] private int safeHumans;
     [SerializeField] private bool skipTurn = false;
     private int player1Switches = 0;
@@ -188,7 +187,7 @@ public class CombatManager : MonoBehaviour {
         keyUI.UpdateP1KeysPosition(currPet);
     }
 
-    // Author(s): Ashley Sun, Daniel J. Garcia
+    // Author(s): Thomas Wang, Daniel J. Garcia
     // goes to previous Human if p2PrevKey ("up") is pressed
     public void PreviousHuman() {
         if (humanIndex > 0 && humanSwitches < 2) {
@@ -209,7 +208,7 @@ public class CombatManager : MonoBehaviour {
         keyUI.UpdateP2KeysPosition(currHuman);
     }
 
-    // Author(s): Ashley Sun, Daniel J. Garcia
+    // Author(s): Thomas Wang, Daniel J. Garcia
     public void NextHuman() {
         if (humanIndex < (currHumans.Count - 1) && humanSwitches < 2) {
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
@@ -230,7 +229,7 @@ public class CombatManager : MonoBehaviour {
         keyUI.UpdateP2KeysPosition(currHuman);
     }
 
-    // Author(s): Logan Mikulski
+    // Author(s): Thomas Wang
     // goes to next Item if prevItemKey ("a") is pressed
     public void PreviousItem() {
         if (itemIndex > 0) {
@@ -242,7 +241,7 @@ public class CombatManager : MonoBehaviour {
         itemUI.SetPotionUI(currItem);
     }
 
-    // Author(s): Logan Mikulski
+    // Author(s)(s): Thomas Wang
     // goes to next Item if nextItemKey ("d") is pressed
     public void NextItem() {
         if (itemIndex < (currItems.Count - 1)) {
@@ -254,7 +253,7 @@ public class CombatManager : MonoBehaviour {
         itemUI.SetPotionUI(currItem);
     }
 
-    // Author: Thomas Wang, Ashley Sun
+    // Author(s): Thomas Wang
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
     public IEnumerator PetAttack() {
         keyUI.TurnOffP1Keys();
@@ -291,7 +290,7 @@ public class CombatManager : MonoBehaviour {
 
     }
 
-    // Author: Thomas Wang, Ashley Sun
+    // Author(s): Thomas Wang
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
     public IEnumerator HumanAttack() {
         keyUI.TurnOffP2Keys();
@@ -324,6 +323,7 @@ public class CombatManager : MonoBehaviour {
 
     }
 
+    // Author(s): Thomas Wang
     public IEnumerator AIAttack() {
         isAttacking = true;
         yield return new WaitForSeconds(aiDelay);
@@ -352,6 +352,7 @@ public class CombatManager : MonoBehaviour {
 
     }
 
+    // Author(s): Thomas Wang
     public void UseItem() {
         currItem.UseItem(this);
         infoUI.newPotionText(currPet, currItem);
@@ -363,6 +364,7 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    // Author(s): Daniel J. Garcia
     void AISwitch()
     {
         if (humanIndex == (currHumans.Count-1))

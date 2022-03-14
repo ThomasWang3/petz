@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-// Author(s): Thomas Wang, Logan Mikulski
+// Author(s): Thomas Wang
 public class VictoryUI : MonoBehaviour
 {
     [SerializeField] private Text victoryText;

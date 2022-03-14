@@ -6,7 +6,6 @@ using UnityEngine.UI;
 // Author: Thomas Wang
 public class InfoUI : MonoBehaviour
 {
-    //[SerializeField] private CombatManager cm;
     [SerializeField] private Text infoText1;
     [SerializeField] private Text infoText2;
 

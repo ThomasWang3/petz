@@ -68,7 +68,9 @@
     <Compile Include="Assets\Scripts\Characters\Humans\RichMan.cs" />
     <Compile Include="Assets\Scripts\UI\HelpUI.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Dog.cs" />
+    <Compile Include="Assets\Scripts\CameraTracker.cs" />
     <Compile Include="Assets\Scripts\Characters\Humans\OldLady.cs" />
+    <Compile Include="Assets\Scripts\Characters\SpecialChaseAI.cs" />
     <Compile Include="Assets\Scripts\CombatManager.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Snake.cs" />
     <Compile Include="Assets\Scripts\UI\PauseUI.cs" />
@@ -76,8 +78,8 @@
     <Compile Include="Assets\Scripts\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Cat.cs" />
     <Compile Include="Assets\Scripts\Items\SpeedItem.cs" />
+    <Compile Include="Assets\Scripts\Items\HealingItem.cs" />
     <Compile Include="Assets\Scripts\Characters\Humans\Human.cs" />
-    <Compile Include="Assets\Scripts\UI\AttackButton.cs" />
     <Compile Include="Assets\Scripts\Characters\Humans\Fisherman.cs" />
     <Compile Include="Assets\Scripts\UI\PetUI.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Fish.cs" />
@@ -90,9 +92,6 @@
     <Compile Include="Assets\Scripts\UI\HumanUI.cs" />
     <Compile Include="Assets\Scripts\UI\InfoUI.cs" />
     <Compile Include="Assets\Scripts\Items\StrengthItem.cs" />
-    <Compile Include="Assets\Scripts\Items\HealingItem.cs" />
-    <Compile Include="Assets\Scripts\Characters\SpecialChaseAI.cs" />
-    <Compile Include="Assets\Scripts\CameraTracker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
