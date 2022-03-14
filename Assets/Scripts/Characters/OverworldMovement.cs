@@ -11,6 +11,7 @@ public class OverworldMovement : MonoBehaviour
     [SerializeField] protected Rigidbody2D playerRB;
     [SerializeField] protected BoxCollider2D playerBC;
     [SerializeField] private EnemyManager em;
+    [SerializeField] private Transform player;
     private Vector2 movementDirection;
     [SerializeField] protected LevelManager lm;
 
