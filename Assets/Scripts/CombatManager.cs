@@ -362,6 +362,8 @@ public class CombatManager : MonoBehaviour {
         } else {
             itemUI.EmptyPotionUI();
         }
+        petUI.UpdateText(currPet);
+
     }
 
     // Author(s): Daniel J. Garcia
