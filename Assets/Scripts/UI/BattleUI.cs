@@ -18,11 +18,10 @@ public class BattleUI : MonoBehaviour
     protected Color fullHealthColor = Color.green;
     protected Color zeroHealthColor = Color.red;
 
-    [SerializeField] protected CombatManager cm;
     //[SerializeField] protected MultiplayerCombatManager mcm;
     protected Character character;
 
-    protected virtual void updateChar() { }
+    public virtual void updateChar(Character character) { }
 
 
 
@@ -41,12 +40,12 @@ public class BattleUI : MonoBehaviour
         
     }
 
-    protected void Update() {
-        updateChar();
+    public void UpdateText(Character character) {
+        updateChar(character);
         if (character != null) {
             if (charName.text != character.getName()) {
                 character.gameObject.SetActive(false);
-                updateChar();
+                updateChar(character);
                 character.gameObject.SetActive(true);
                 SetHealthUI();
             }

@@ -5,12 +5,7 @@ using UnityEngine;
 // Author(s): Thomas Wang
 public class PetUI : BattleUI 
 {
-
-    protected void OnEnable() {
-        character = cm.getCurrPet();
-    }
-
-    override protected void updateChar() {
-        character = cm.getCurrPet();
+    override public void updateChar(Character newChar) {
+        character = newChar;
     }
 }

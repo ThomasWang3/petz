@@ -50,6 +50,8 @@ public class CombatManager : MonoBehaviour {
     //I will use this to implement the switch limit and reset it in certain areas
 
     // UI
+    [SerializeField] private HumanUI humanUI;
+    [SerializeField] private PetUI petUI;
     [SerializeField] private VictoryUI victoryUI;
     [SerializeField] private PauseUI pauseUI;
     [SerializeField] private InfoUI infoUI;
@@ -69,12 +71,14 @@ public class CombatManager : MonoBehaviour {
                 currPets[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
             }
         }
+        petUI.UpdateText(currPet);
         currHuman = currHumans[humanIndex];
         for (int i = 0; i < currHumans.Count; i++) {
             if (currHumans[i] != currHuman) {
                 currHumans[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
             }
         }
+        humanUI.UpdateText(currHuman);
         if (!multiplayer) {
             currItem = currItems[itemIndex];
             itemUI.SetPotionUI(currItem);
@@ -162,6 +166,7 @@ public class CombatManager : MonoBehaviour {
                 keyUI.TurnOnP1Keys();
             }
         }
+        petUI.UpdateText(currPet);
         keyUI.UpdateP1KeysPosition(currPet);
     }
 
@@ -181,6 +186,8 @@ public class CombatManager : MonoBehaviour {
                 keyUI.TurnOnP1Keys();
             }
         }
+
+        petUI.UpdateText(currPet);
         keyUI.UpdateP1KeysPosition(currPet);
     }
 
@@ -202,6 +209,7 @@ public class CombatManager : MonoBehaviour {
                 }
             }
         }
+        humanUI.UpdateText(currHuman);
         keyUI.UpdateP2KeysPosition(currHuman);
     }
 
@@ -223,7 +231,8 @@ public class CombatManager : MonoBehaviour {
             }
         }
         // goes to next Human if p2PrevKey ("down") is pressed
-       keyUI.UpdateP2KeysPosition(currHuman);
+        humanUI.UpdateText(currHuman);
+        keyUI.UpdateP2KeysPosition(currHuman);
     }
 
     // Author(s): Logan Mikulski

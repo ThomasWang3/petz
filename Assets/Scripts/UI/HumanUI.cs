@@ -5,12 +5,7 @@ using UnityEngine;
 // Author(s): Thomas Wang
 public class HumanUI : BattleUI 
 {
-
-    protected void OnEnable() {
-        character = cm.getCurrHuman();
-    }
-
-    override protected void updateChar() {
-        character = cm.getCurrHuman();
+    override public void updateChar(Character newChar) {
+        character = newChar;
     }
 }

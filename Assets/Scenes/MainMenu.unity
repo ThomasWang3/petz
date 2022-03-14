@@ -543,6 +543,7 @@ MonoBehaviour:
   - RichManFight
   - 2pScene
   currentLevelIndex: 0
+  player: {fileID: 0}
 --- !u!1 &1017313490
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,8 +952,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 939504526}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadLevelWithIndex
-        m_Mode: 3
+        m_MethodName: NewGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1163,8 +1164,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 939504526}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadLevelWithIndex
-        m_Mode: 3
+        m_MethodName: MultiplayerGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

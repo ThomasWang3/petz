@@ -3452,6 +3452,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1efb2e63f01d14fb1100f7c7a95cce, type: 3}
+--- !u!114 &1171882898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 243360051695765173, guid: 5a1efb2e63f01d14fb1100f7c7a95cce, type: 3}
+  m_PrefabInstance: {fileID: 1171882897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fd8cca276389b428e30db12426d23d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1213509837
 GameObject:
   m_ObjectHideFlags: 0
@@ -4629,6 +4640,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28766ca52889e804f83732fba8c38ba5, type: 3}
+--- !u!114 &1723634509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8729511961843729777, guid: 28766ca52889e804f83732fba8c38ba5, type: 3}
+  m_PrefabInstance: {fileID: 1723634508}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4debc0620c530144c8f2270ba7c222df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1760828647
 GameObject:
   m_ObjectHideFlags: 0
@@ -5325,6 +5347,8 @@ MonoBehaviour:
   playerDelay: 1
   safeHumans: 0
   skipTurn: 0
+  humanUI: {fileID: 1171882898}
+  petUI: {fileID: 1723634509}
   victoryUI: {fileID: 1022438037}
   pauseUI: {fileID: 120701688}
   infoUI: {fileID: 1777838443}
@@ -5387,6 +5411,8 @@ MonoBehaviour:
   - RichManFight
   - 2pScene
   currentLevelIndex: 3
+  player: {fileID: 0}
+  pauseUI: {fileID: 0}
 --- !u!114 &2110807449
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1409,6 +1409,8 @@ MonoBehaviour:
   - RichManFight
   - 2pScene
   currentLevelIndex: 6
+  player: {fileID: 0}
+  pauseUI: {fileID: 0}
 --- !u!1 &880373170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,6 +3362,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8810697069276619227, guid: 5a1efb2e63f01d14fb1100f7c7a95cce, type: 3}
   m_PrefabInstance: {fileID: 1596627038}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1596627040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 243360051695765173, guid: 5a1efb2e63f01d14fb1100f7c7a95cce, type: 3}
+  m_PrefabInstance: {fileID: 1596627038}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fd8cca276389b428e30db12426d23d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1624853792
 GameObject:
   m_ObjectHideFlags: 0
@@ -3627,6 +3640,8 @@ MonoBehaviour:
   playerDelay: 1
   safeHumans: 0
   skipTurn: 0
+  humanUI: {fileID: 1596627040}
+  petUI: {fileID: 1834910245}
   victoryUI: {fileID: 1124847110}
   pauseUI: {fileID: 1120603513}
   infoUI: {fileID: 1938826375}
@@ -4391,6 +4406,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8729511961843729782, guid: 28766ca52889e804f83732fba8c38ba5, type: 3}
   m_PrefabInstance: {fileID: 1834910243}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1834910245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8729511961843729777, guid: 28766ca52889e804f83732fba8c38ba5, type: 3}
+  m_PrefabInstance: {fileID: 1834910243}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4debc0620c530144c8f2270ba7c222df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1903414565
 GameObject:
   m_ObjectHideFlags: 0

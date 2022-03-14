@@ -7,18 +7,34 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
     public string[] levels;
     public int currentLevelIndex;
+    [SerializeField] private GameObject player;
+    [SerializeField] private PauseUI pauseUI;
     //GameObject pauseUI = GameObject.Find("PauseUI");
 
 
     public void LoadLevelWithIndex(int index) {
         // check for validity of index
         if (index <= levels.Length) {
+            pauseUI.Pause();
             SceneManager.LoadSceneAsync(levels[index], LoadSceneMode.Additive);
         }
     }
 
     public void ReturnToOverworld() {
         SceneManager.UnloadSceneAsync(currentLevelIndex);
+        Debug.Log("returning to overworld");
+        if (player != null) {
+            Debug.Log("reactivating player");
+            player.SetActive(true);
+        } else {
+            Debug.Log("player is null");
+            if (player.activeSelf) {
+                Debug.Log("active player");
+            } else {
+                Debug.Log("active player");
+            }
+
+        }
     }
 
     public void NextLevel() {
@@ -39,7 +55,13 @@ public class LevelManager : MonoBehaviour {
 
     public void NewGame() {
         currentLevelIndex = 1;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(currentLevelIndex);
+        Time.timeScale = 1;
+    }
+
+    public void MultiplayerGame() {
+        currentLevelIndex = 6;
+        SceneManager.LoadScene(currentLevelIndex);
         Time.timeScale = 1;
     }
 
