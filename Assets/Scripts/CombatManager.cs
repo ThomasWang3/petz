@@ -64,21 +64,18 @@ public class CombatManager : MonoBehaviour {
         //need to fill pets array and humans array with all pets and humans in current fight
         currPet = currPets[petIndex];
         keyUI.UpdateP1KeysPosition(currPet);
-        //keyUI.UpdateSwitchKeysPosition(currPet);
         safeHumans = currHumans.Count;
         for (int i = 0; i < currPets.Count; i++) {
             if (currPets[i] != currPet) {
                 currPets[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
             }
         }
-        petUI.UpdateText(currPet);
         currHuman = currHumans[humanIndex];
         for (int i = 0; i < currHumans.Count; i++) {
             if (currHumans[i] != currHuman) {
                 currHumans[i].GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.6f);
             }
         }
-        humanUI.UpdateText(currHuman);
         if (!multiplayer) {
             currItem = currItems[itemIndex];
             itemUI.SetPotionUI(currItem);
@@ -92,6 +89,8 @@ public class CombatManager : MonoBehaviour {
             keyUI.UpdateP2KeysPosition(currHuman);
             keyUI.TurnOffP2Keys();
         }
+        petUI.UpdateText(currPet);
+        humanUI.UpdateText(currHuman);
     }
 
     public Pet getCurrPet()
@@ -153,7 +152,6 @@ public class CombatManager : MonoBehaviour {
     // Author(s): Thomas Wang
     // goes to previous Pet if p1PrevKey ("w") is pressed
     public void PreviousPet() {
-        //Debug.Log("previous function");
         if (petIndex > 0 && player1Switches < 2) {
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             petIndex--;
@@ -173,7 +171,6 @@ public class CombatManager : MonoBehaviour {
     // Author(s): Thomas Wang
     // goes to next Pet if p1NextKey ("s") is pressed
     public void NextPet() {
-        //Debug.Log("next function");
         if (petIndex < (currPets.Count - 1) && player1Switches < 2) {
             currPets[petIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             petIndex++;
@@ -194,7 +191,6 @@ public class CombatManager : MonoBehaviour {
     // Author(s): Ashley Sun, Daniel J. Garcia
     // goes to previous Human if p2PrevKey ("up") is pressed
     public void PreviousHuman() {
-        //Debug.Log("previous function");
         if (humanIndex > 0 && humanSwitches < 2) {
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             humanIndex--;
@@ -215,7 +211,6 @@ public class CombatManager : MonoBehaviour {
 
     // Author(s): Ashley Sun, Daniel J. Garcia
     public void NextHuman() {
-        //Debug.Log("next function");
         if (humanIndex < (currHumans.Count - 1) && humanSwitches < 2) {
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -0.6f);
             humanIndex++;
@@ -263,17 +258,15 @@ public class CombatManager : MonoBehaviour {
     // facilitates attack and updates the text, also implements a delay to make combat not so instantaneous
     public IEnumerator PetAttack() {
         keyUI.TurnOffP1Keys();
-        //Debug.Log(currPet.type + " is attacking " + currHuman.type);
         isAttacking = true;
-        //currPet.AttackEnemy(currHuman);
         infoUI.newAttackText(currPet, currHuman, currPet.AttackEnemy(currHuman));
+        humanUI.UpdateText(currHuman);
         player1Switches = 0;
         if (currHuman.getIsDead()) {
             RemoveHuman();
         }
         if (currHumans.Count == 0) {
             petWin = true;
-            //pauseUI.Win();
             victoryUI.PetVictory();
             if (!multiplayer) {
                 StartCoroutine(ReturnToOverworld());
@@ -295,6 +288,7 @@ public class CombatManager : MonoBehaviour {
             keyUI.TurnOnP2Keys();
         }
         p1Turn = false;
+
     }
 
     // Author: Thomas Wang, Ashley Sun
@@ -302,20 +296,18 @@ public class CombatManager : MonoBehaviour {
     public IEnumerator HumanAttack() {
         keyUI.TurnOffP2Keys();
         isAttacking = true;
-        //Debug.Log(currHuman.type + " is attacking " + currPet.type);
         if (!multiplayer) {
             yield return new WaitForSeconds(aiDelay);
         }
         if (skipTurn == false) {
-            //currHuman.AttackEnemy(currPet);
             infoUI.newAttackText(currHuman, currPet, currHuman.AttackEnemy(currPet));
+            petUI.UpdateText(currPet);
             humanSwitches = 0;
             if (currPet.getIsDead()) {
                 RemovePet();
             }
             if (currPets.Count == 0) {
                 humanWin = true;
-                //pauseUI.Win();
                 victoryUI.HumanVictory();
                 StartCoroutine(ReturnToMainMenu());
             }
@@ -329,22 +321,21 @@ public class CombatManager : MonoBehaviour {
         isAttacking = false;
         keyUI.TurnOnP1Keys();
         p1Turn = true;
+
     }
 
     public IEnumerator AIAttack() {
         isAttacking = true;
-        //Debug.Log(currHuman.type + " is attacking " + currPet.type);
         yield return new WaitForSeconds(aiDelay);
         if (skipTurn == false) {
-            //currHuman.AttackEnemy(currPet);
             infoUI.newAttackText(currHuman, currPet, currHuman.AttackEnemy(currPet));
+            petUI.UpdateText(currPet);
             humanSwitches = 0;
             if (currPet.getIsDead()) {
                 RemovePet();
             }
             if (currPets.Count == 0) {
                 humanWin = true;
-                //pauseUI.Win();
                 victoryUI.HumanVictory();
                 StartCoroutine(ReturnToMainMenu());
             }
@@ -358,6 +349,7 @@ public class CombatManager : MonoBehaviour {
         isAttacking = false;
         keyUI.TurnOnP1Keys();
         p1Turn = true;
+
     }
 
     public void UseItem() {
@@ -387,6 +379,7 @@ public class CombatManager : MonoBehaviour {
             currHuman = currHumans[humanIndex];
             currHumans[humanIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
+        humanUI.UpdateText(currHuman);
     }
 
     // Author(s): Daniel J. Garcia
@@ -492,12 +485,10 @@ public class CombatManager : MonoBehaviour {
     }
 
     private IEnumerator ReturnToOverworld() {
-        Debug.Log("Victory! Loading Overworld");
         yield return new WaitForSeconds(1.0f);
         lm.ReturnToOverworld();
     }
     private IEnumerator ReturnToMainMenu() {
-        Debug.Log("Loading Main Menu");
         yield return new WaitForSeconds(1.0f);
         lm.LoadMainMenu();
     }

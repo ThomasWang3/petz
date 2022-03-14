@@ -39,9 +39,7 @@ public class AIManager : MonoBehaviour {
                     //pass the item the combat manager so the item's actions can be carried out
                     cm.UseItem();
                     // since a player can use an item and attack, we don't call humanAttack() afterwards
-                    //humanAttack();
                 } else if (Input.GetKeyDown(p1AttackKey)) {
-                    //Debug.Log("space button pressed");
                     StartCoroutine(cm.PetAttack());
                 }
             } else {

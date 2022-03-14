@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Author(s): Logan Mikulski
-public class HealingItem : Item
-{
+public class HealingItem : Item {
     [SerializeField] private int hpIncrease = 50;
     public override string getItemDescription() {
         return "Health increased by " + hpIncrease;
@@ -13,21 +12,16 @@ public class HealingItem : Item
         return "(HP+)";
     }
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         itemName = "Health Potion";
     }
 
-    public override void UseItem(CombatManager combatManager)
-    {
+    public override void UseItem(CombatManager combatManager) {
         Pet currPet = combatManager.getCurrPet();
 
-        if (currPet.getCurrHealth() + hpIncrease >= currPet.getMaxHealth())
-        {
+        if (currPet.getCurrHealth() + hpIncrease >= currPet.getMaxHealth()) {
             currPet.setCurrHealth(currPet.getMaxHealth());
-        }
-        else
-        {
+        } else {
             currPet.setCurrHealth(currPet.getCurrHealth() + hpIncrease);
         }
     }

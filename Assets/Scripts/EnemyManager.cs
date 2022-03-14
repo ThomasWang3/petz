@@ -10,18 +10,6 @@ public class EnemyManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Awake() {
-        // Debug.Log("enemiesLeft: " + enemiesLeft);
-        // Debug.Log("enemies: " + enemies[0]);
-            //DontDestroyOnLoad(this.gameObject);
-            //if(em == null) {
-            //    Debug.Log("first instance");
-            //    em = this;
-            //    Debug.Log("enemies size: " + enemies.Count);
-            //} else {
-            //    Debug.Log("second instance");
-            //    em.SetActive();
-            //    Destroy(this.gameObject);
-            //}
             for (int i = 0; i < enemies.Count; i++) {
                 if (enemies[i].activeSelf)
                     activeEnemies.Add(true);
@@ -41,6 +29,5 @@ public class EnemyManager : MonoBehaviour {
             if(enemiesLeft == -1) {
                 doorPortal.SetActive(true);
             }
-            //RefreshEnemies();
         }
     }
