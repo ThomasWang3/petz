@@ -8,6 +8,9 @@ public class CombatManager : MonoBehaviour {
     // Multiplayer Check
     [SerializeField] private bool multiplayer;
     [SerializeField] private bool p1Turn = true;
+    [SerializeField] private LevelManager lm;
+    // Level Manager
+
 
     // Pet object information
     [SerializeField] private Pet currPet;
@@ -255,7 +258,8 @@ public class CombatManager : MonoBehaviour {
         if (currHumans.Count == 0) {
             petWin = true;
             //pauseUI.Win();
-            victoryUI.Victory();
+            victoryUI.Victory(petWin, humanWin);
+            StartCoroutine(ReturnToOverworld());
         }
         yield return new WaitForSeconds(playerDelay);
         if (!skipTurn) {
@@ -292,7 +296,8 @@ public class CombatManager : MonoBehaviour {
             if (currPets.Count == 0) {
                 humanWin = true;
                 //pauseUI.Win();
-                victoryUI.Victory();
+                victoryUI.Victory(petWin, humanWin);
+                StartCoroutine(ReturnToOverworld());
             }
             yield return new WaitForSeconds(playerDelay);
             turnText.text = "Player 1's Turn";
@@ -320,7 +325,8 @@ public class CombatManager : MonoBehaviour {
             if (currPets.Count == 0) {
                 humanWin = true;
                 //pauseUI.Win();
-                victoryUI.Victory();
+                victoryUI.Victory(petWin, humanWin);
+                StartCoroutine(ReturnToOverworld());
             }
             yield return new WaitForSeconds(aiDelay);
             turnText.text = "Player 1's Turn";
@@ -463,5 +469,12 @@ public class CombatManager : MonoBehaviour {
             currItem = currItems[itemIndex];
             currItems[itemIndex].GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.6f);
         }
+    }
+
+    private IEnumerator ReturnToOverworld()
+    {
+        Debug.Log("Victory! Loading Overworld");
+        yield return new WaitForSeconds(1.0f);
+        lm.LoadLevelWithIndex(1);
     }
 }

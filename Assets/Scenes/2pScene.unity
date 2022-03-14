@@ -2357,9 +2357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073ba95bb89c0d54487444c2360ce197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cm: {fileID: 1695947241}
   victoryText: {fileID: 1124847111}
-  lm: {fileID: 0}
 --- !u!114 &1124847111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3749,6 +3747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multiplayer: 1
   p1Turn: 1
+  lm: {fileID: 858786889}
   currPet: {fileID: 0}
   currPets:
   - {fileID: 587968817}
