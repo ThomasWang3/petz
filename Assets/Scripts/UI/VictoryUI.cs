@@ -10,15 +10,12 @@ public class VictoryUI : MonoBehaviour
     [SerializeField] private Text victoryText;
     // Start is called before the first frame update
 
-    public void Victory(bool petWin, bool humanWin)
-    {
-        if (petWin)
-        {
-            victoryText.text = "Pets Win!";
-        }
-        else if (humanWin)
-        {
-            victoryText.text = "Humans Win!";
-        }
+    public void PetVictory() {
+        victoryText.text = "Pets Win!";
     }
+
+    public void HumanVictory() {
+        victoryText.text = "Humans Win!";
+    }
+
 }

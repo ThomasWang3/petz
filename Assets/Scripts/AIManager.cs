@@ -31,11 +31,11 @@ public class AIManager : MonoBehaviour {
                     cm.PreviousPet();
                 } else if (Input.GetKeyDown(p1NextKey)) {
                     cm.NextPet();
-                } else if (Input.GetKeyDown(prevItemKey) && cm.getCurrPet() != null) {
+                } else if (Input.GetKeyDown(prevItemKey) && cm.getCurrItem() != null) {
                     cm.PreviousItem();
-                } else if (Input.GetKeyDown(nextItemKey) && cm.getCurrPet() != null) {
+                } else if (Input.GetKeyDown(nextItemKey) && cm.getCurrItem() != null) {
                     cm.NextItem();
-                } else if (Input.GetKeyDown(useItemKey) && cm.getCurrPet() != null) {
+                } else if (Input.GetKeyDown(useItemKey) && cm.getCurrItem() != null) {
                     //pass the item the combat manager so the item's actions can be carried out
                     cm.UseItem();
                     // since a player can use an item and attack, we don't call humanAttack() afterwards

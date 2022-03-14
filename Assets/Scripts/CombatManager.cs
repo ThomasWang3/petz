@@ -109,6 +109,13 @@ public class CombatManager : MonoBehaviour {
     {
         return currHumans;
     }
+    public Item getCurrItem() {
+        return currItem;
+    }
+
+    public List<Item> getCurrItems() {
+        return currItems;
+    }
 
     public bool getPetWin()
     {
@@ -258,8 +265,12 @@ public class CombatManager : MonoBehaviour {
         if (currHumans.Count == 0) {
             petWin = true;
             //pauseUI.Win();
-            victoryUI.Victory(petWin, humanWin);
-            StartCoroutine(ReturnToOverworld());
+            victoryUI.PetVictory();
+            if (!multiplayer) {
+                StartCoroutine(ReturnToOverworld());
+            } else {
+                StartCoroutine(ReturnToMainMenu());
+            }
         }
         yield return new WaitForSeconds(playerDelay);
         if (!skipTurn) {
@@ -296,8 +307,8 @@ public class CombatManager : MonoBehaviour {
             if (currPets.Count == 0) {
                 humanWin = true;
                 //pauseUI.Win();
-                victoryUI.Victory(petWin, humanWin);
-                StartCoroutine(ReturnToOverworld());
+                victoryUI.HumanVictory();
+                StartCoroutine(ReturnToMainMenu());
             }
             yield return new WaitForSeconds(playerDelay);
             turnText.text = "Player 1's Turn";
@@ -325,8 +336,8 @@ public class CombatManager : MonoBehaviour {
             if (currPets.Count == 0) {
                 humanWin = true;
                 //pauseUI.Win();
-                victoryUI.Victory(petWin, humanWin);
-                StartCoroutine(ReturnToOverworld());
+                victoryUI.HumanVictory();
+                StartCoroutine(ReturnToMainMenu());
             }
             yield return new WaitForSeconds(aiDelay);
             turnText.text = "Player 1's Turn";
@@ -471,10 +482,14 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator ReturnToOverworld()
-    {
+    private IEnumerator ReturnToOverworld() {
         Debug.Log("Victory! Loading Overworld");
         yield return new WaitForSeconds(1.0f);
-        lm.LoadLevelWithIndex(1);
+        lm.ReturnToOverworld();
+    }
+    private IEnumerator ReturnToMainMenu() {
+        Debug.Log("Loading Main Menu");
+        yield return new WaitForSeconds(1.0f);
+        lm.LoadMainMenu();
     }
 }

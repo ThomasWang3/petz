@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Characters\Humans\PunkKid.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Pet.cs" />
     <Compile Include="Assets\Scripts\Items\WeaknessHealthItem.cs" />
+    <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Bird.cs" />
     <Compile Include="Assets\Scripts\Characters\Humans\RichMan.cs" />
     <Compile Include="Assets\Scripts\UI\HelpUI.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\Items\SpeedItem.cs" />
     <Compile Include="Assets\Scripts\Characters\Humans\Human.cs" />
     <Compile Include="Assets\Scripts\UI\AttackButton.cs" />
+    <Compile Include="Assets\Scripts\camera_tracker.cs" />
     <Compile Include="Assets\Scripts\Characters\Humans\Fisherman.cs" />
     <Compile Include="Assets\Scripts\UI\PetUI.cs" />
     <Compile Include="Assets\Scripts\Characters\Pets\Fish.cs" />
@@ -91,7 +93,6 @@
     <Compile Include="Assets\Scripts\UI\HumanUI.cs" />
     <Compile Include="Assets\Scripts\UI\InfoUI.cs" />
     <Compile Include="Assets\Scripts\Items\StrengthItem.cs" />
-    <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\AIManager.cs" />
   </ItemGroup>
   <ItemGroup>

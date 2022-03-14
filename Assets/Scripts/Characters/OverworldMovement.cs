@@ -44,19 +44,21 @@ public class OverworldMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.layer >= 6) {
-            Debug.Log("Enemy Collision");
-            Debug.Log("collision.gameObject.layer = " + collision.gameObject.layer);
+        if (collision.gameObject.layer >= 6 && collision.gameObject.layer < 10) {
+            //Debug.Log("Enemy Collision");
+            //Debug.Log("collision.gameObject.layer = " + collision.gameObject.layer);
             if (collision.gameObject.layer >= 6)
             {
                 int temp = collision.gameObject.layer - 6;
-                Debug.Log("collision.gameObject.layer = " + temp);
-                Debug.Log("enemies " + em.enemies[0]);
+                //Debug.Log("collision.gameObject.layer = " + temp);
+                //Debug.Log("enemies " + em.enemies[0]);
                 em.ReduceEnemyCount(temp);
             }
             //em.ReduceEnemyCount(collision.gameObject.tag == "PunkKid");
             lm.LoadLevelWithIndex(collision.gameObject.layer - 4);
-            Debug.Log("Enemy Collision end");
+            //Debug.Log("Enemy Collision end");
+        } else if(collision.gameObject.layer == 10) {
+            lm.LoadMainMenu();
         }
     }
 }
